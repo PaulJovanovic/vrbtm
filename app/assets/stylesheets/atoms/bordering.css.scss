@@ -1,0 +1,140 @@
+// n = negagative
+// bw = border-width
+// a,t,r,b,l,h,v = all,top,right,bottom,left,horizontal,vertical
+// s,m,l,n = small($border-small),medium($border-medium),large($border-large),none(0px)
+
+.bwtn, .bwvn, .bwan {
+  border-top-width: 0px;
+}
+.bwts, .bwvs, .bwas, .bwts-plus + .bwts-plus {
+  border-top-width: $border-small;
+}
+.bwtm, .bwvm, .bwam, .bwtm-plus + .bwtm-plus {
+  border-top-width: $border-medium;
+}
+.bwtl, .bwvl, .bwal, .bwtl-plus + .bwtl-plus {
+  border-top-width: $border-large;
+}
+
+.bwln, .bwhn, .bwan {
+  border-left-width: 0px;
+}
+.bwls, .bwhs, .bwas, .bwls-plus + .bwls-plus {
+  border-left-width: $border-small;
+}
+.bwlm, .bwhm, .bwam, .bwlm-plus + .bwlm-plus {
+  border-left-width: $border-medium;
+}
+.bwll, .bwhl, .bwal, .bwll-plus + .bwll-plus {
+  border-left-width: $border-large;
+}
+
+.bwbn, .bwvn, .bwan {
+  border-bottom-width: 0px;
+}
+.bwbs, .bwvs, .bwas {
+  border-bottom-width: $border-small;
+}
+.bwbm, .bwvm, .bwam {
+  border-bottom-width: $border-medium;
+}
+.bwbl, .bwvl, .bwal {
+  border-bottom-width: $border-large;
+}
+
+.bwrn, .bwhn, .bwan {
+  border-right-width: 0px;
+}
+.bwrs, .bwhs, .bwas {
+  border-right-width: $border-small;
+}
+.bwrm, .bwhm, .bwam {
+  border-right-width: $border-medium;
+}
+.bwrl, .bwhl, .bwal {
+  border-right-width: $border-large;
+}
+
+.bss {
+  border-style: solid;
+}
+
+.bsd {
+  border-style: dashed;
+}
+
+.bc-1, .active .bc-1-active {
+  border-color: $shade1;
+}
+
+.bc-2, .active .bc-2-active {
+  border-color: $shade2;
+}
+
+.bc-3, .active .bc-3-active {
+  border-color: $shade3;
+}
+
+.bc-4, .active .bc-4-active {
+  border-color: $shade4;
+}
+
+.bc-5, .active .bc-5-active {
+  border-color: $shade5;
+}
+
+.bc-6, .active .bc-6-active {
+  border-color: $shade6;
+}
+
+.bc-7, .active .bc-7-active {
+  border-color: $shade7;
+}
+
+.bc-8, .active .bc-8-active {
+  border-color: $shade8;
+}
+
+.bc-9, .active .bc-9-active {
+  border-color: $shade9;
+}
+
+.bc-10, .active .bc-10-active {
+  border-color: $shade10;
+}
+
+.bc-11, .active .bc-11-active {
+  border-color: $shade10;
+}
+
+.bc-12, .active .bc-12-active {
+  border-color: $shade12;
+}
+
+.bc-13, .active .bc-13-active {
+  border-color: $shade13;
+}
+
+.bc-14, .active .bc-14-active {
+  border-color: $shade14;
+}
+
+.bc-15, .active .bc-15-active {
+  border-color: $shade15;
+}
+
+.bc-16, .active .bc-16-active {
+  border-color: $shade16;
+}
+
+.bc-red, .active .bc-red-active {
+  border-color: $red;
+}
+
+.bc-orange, .active .bc-orange-active {
+  border-color: $orange;
+}
+
+.bc-teal, .active .bc-teal-active {
+  border-color: $teal;
+}

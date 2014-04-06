@@ -1,0 +1,30 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div>
+    <%= f.email_field :email, placeholder: "Email address", class: "phxxxs pvxxxs fsxxxs full-width", autofocus: true %>
+  </div>
+  <div class="mtxs">
+    <%= f.password_field :password, placeholder: "Password", class: "phxxxs pvxxxs fsxxxs full-width", autocomplete: "off" %>
+  </div>
+  <div class="row nmhxs">
+    <div class="col-sm-6 phxs mtxs">
+      <div class="fsxxxxs c-16">
+        <table class="full-width">
+          <tr>
+            <td>
+              <%= f.check_box :remember_me %>
+            </td>
+            <td class="plxxs">
+              Remember Me
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="mtxxxxs fsxxxxs c-16">
+        <%= link_to "Forgot password?", "#", class: "c-teal" %>
+      </div>
+    </div>
+    <div class="col-sm-6 phxs mtxs">
+      <%= f.submit "sign in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
+    </div>
+  </div>
+<% end %>

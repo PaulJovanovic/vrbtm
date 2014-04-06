@@ -1,0 +1,99 @@
+label {
+  font-family: "Proxima Nova";
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+
+  &.input {
+    height: 44px;
+    line-height: 44px;
+  }
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #FFFFFF;
+  color: #333333;
+  font-size: 14px;
+  margin: 0;
+}
+
+input + label {
+  margin-left: 5px;
+}
+
+input[type=text], input[type=password], input[type=email], textarea {
+  border: solid 1px #CCCCCC;
+  height: 44px;
+  padding: 0 13px;
+  width: 100%;
+
+  &.inline {
+    border-left: none;
+  }
+}
+
+input[type="radio"]:before {
+  color: #AAAAAA;
+  content: "\e042";
+  font-family: "Stack-Icons";
+  font-size: 11px;
+}
+
+input[type="radio"]:checked:before {
+  content: "\e041";
+}
+
+input[type="checkbox"] {
+  color: #666666;
+  border: 1px solid #CCCCCC;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  height: 14px;
+  width: 14px;
+
+  &:checked {
+    background-image: url(icon-check-small.png);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+textarea {
+  height: 88px;
+  padding: 13px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #FFFFFF;
+  background-image: url(arrow-select.png);
+  background-position: right 13px center;
+  background-repeat: no-repeat;
+  border: solid 1px #CCCCCC;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  color: #999999;
+  height: 44px;
+  padding: 0 13px;
+  width: 100%;
+}
+
+.error {
+  input, select {
+    border: solid 1px $red;
+    margin-bottom: 0 !important;
+  }
+
+  label {
+    display: block;
+    height: 15px;
+  }
+}
