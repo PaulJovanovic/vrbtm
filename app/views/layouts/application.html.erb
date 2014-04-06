@@ -8,8 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <%= link_to "#" do %>
+    <div class="pvxxxs c-16 bg-teal text-center">
+      This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
+    </div>
+  <% end %>
+  <%= yield %>
 </body>
 </html>

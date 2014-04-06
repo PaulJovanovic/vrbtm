@@ -1,65 +1,89 @@
-<div class="bg-2 full">
+<div class="bg-2">
   <div class="container phs">
-    <div class="row nmhxs mtxxxxl">
-      <div class="col-xs-8 col-xs-offset-2 phxs">
-        <div class="row nmhxs mtxxxxl">
-          <div class="col-xs-6 phxs">
-            <div class="dhxxxxxl mha">
-              <%= image_tag "logo_big.png" %>
-              <div class="mtm fws c-16 lhxs" style="font-size: 13px;">
-                An entire social network between quotation marks.
+    <div class="pvxs">
+      <%= image_tag "logo_nav.png" %>
+    </div>
+  </div>
+</div>
+<div class="container phs">
+  <div class="row nmhxs">
+    <div class="col-sm-7 phxs">
+      <div class="mtm phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+        <%= form_for :post, url: posts_path, method: :post, html: { id: "user-posts-create" } do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :quote_id, class: "js-post-quote-id" %>
+        <% end %>
+        <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
+          <%= f.hidden_field :citable_type, value: "Source" %>
+          <%= f.hidden_field :citable_id, class: "js-quote-source-id" %>
+          <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width" %>
+          <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
+          <div class="mtxxs text-right">
+            <%= f.submit "post", class: "btn btn-primary pvxxxs fsxxs fwl" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="mtm">
+        <% current_user.posts.order("created_at desc").each do |post| %>
+          <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+            <div class="row nmhxxxs">
+              <div class="col-xs-1 phxxxs">
+                <div class="dvm bg-2"></div>
+              </div>
+              <div class="col-xs-11 phxxxs">
+                <div class="fsxxxxs fws c-8 pull-right">
+                  <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+                    <%= post.created_at.to_s %>
+                  </abbr>
+                </div>
+                <div class="fsxxxs fwl c-2">
+                  <%= "(#{post.user.first_name} #{post.user.last_name})" %>
+                </div>
+                <div class="mtxxxs fsxs c-2 lhxs">
+                  <i class="fa fa-quote-left c-10"></i>
+                    <%= post.quote.text %>
+                  <i class="fa fa-quote-right c-10"></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-xs-6 phxs">
-            <div class="dhxxxxxl mha">
-              <%= render partial: "devise/sessions/form" %>
-              <div class="mtl">
-                <%= link_to "#" do %>
-                  <div>
-                    <table>
-                      <tr>
-                        <td>
-                          <i class="fa fa-facebook-square c-16 fsxxl"></i>
-                        </td>
-                        <td class="plm fsxxxs fwl c-16">
-                          Sign up with Facebook
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                <% end %>
-                <%= link_to "#" do %>
-                  <div class="mtxs">
-                    <table>
-                      <tr>
-                        <td>
-                          <i class="fa fa-envelope c-16 fsxl"></i>
-                        </td>
-                        <td class="plm fsxxxs fwl c-16">
-                          Sign up with email
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                <% end %>
-              </div>
+            <div class="mtxxxs fss fwl text-right">
+              -<%= post.quote.name %>
             </div>
           </div>
-        </div>
-        <div class="row nmhxs">
-          <div class="col-xs-6 phxs">
-            <div class="dhxxxxxl mha">
-              <div class="c-teal lhxs" style="font-size: 13px;">
-                This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-6 phxs">
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-5 phxs mtm">
+      <div class="dvl bg-2">
 
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $("#quotes-create").on("ajax:success", function(event, data, status, xhr) {
+    $(".js-post-quote-id").val(data.quote.id);
+    $("#user-posts-create").submit();
+  });
+
+  $("#quotes-create input[type=submit]").click(function(event) {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "<%= sources_path %>",
+      data: {
+        source: {
+          name: $(".js-quote-source-name").val()
+        }
+      }
+    }).success(function(data) {
+      console.log(data);
+      $(".js-quote-source-id").val(data.source.id);
+      $("#quotes-create").submit();
+    }).fail(function() {
+      alert("error");
+    });
+    return false;
+  });
+</script>

@@ -1,5 +1,65 @@
-<h2>Sign in</h2>
-
-<%= render "form" %>
-
-<%= render "devise/shared/links" %>
+<div class="bg-2 full">
+  <div class="container phs">
+    <div class="row nmhxs mtxxxxl">
+      <div class="col-xs-8 col-xs-offset-2 phxs">
+        <div class="row nmhxs mtxxxxl">
+          <div class="col-xs-6 phxs">
+            <div class="dhxxxxxl mha">
+              <%= image_tag "logo_big.png" %>
+              <div class="mtm c-16 lhxs" style="font-size: 13px;">
+                An entire social network between quotation marks.
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 phxs">
+            <div id="session-controller" class="relative dhxxxxxl mha no-overflow">
+              <div id="new-session" class="absolute left full-width">
+                <%= render partial: "devise/sessions/form" %>
+                <div class="mtl">
+                  <%= link_to "#" do %>
+                    <div>
+                      <table>
+                        <tr>
+                          <td>
+                            <i class="fa fa-facebook-square c-16 fsxxl"></i>
+                          </td>
+                          <td class="plm fsxxxs fwl c-16">
+                            Sign up with Facebook
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  <% end %>
+                  <%= link_to "#", id: "email-sign-up" do %>
+                    <div class="mtxs">
+                      <table>
+                        <tr>
+                          <td>
+                            <i class="fa fa-envelope c-16 fsxl"></i>
+                          </td>
+                          <td class="plm fsxxxs fwl c-16">
+                            Sign up with email
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div id="new-user" class="relative n-left top full-width bg-2">
+                <%= render partial: "devise/registrations/form" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#email-sign-up").click(function(event) {
+    event.preventDefault();
+    $("#new-session").stop().animate({left: "-100%"}, 300);
+    $("#new-user").stop().animate({left: "0%"}, 300);
+  })
+</script>

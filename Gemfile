@@ -17,6 +17,7 @@ gem 'devise'
 
 group :development do
   gem 'mysql2'
+  gem 'pry-rails'
 end
 
 group :doc do
