@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships
 
   def self.search_by_name(name)
-    names = name.strip.split(" ")
+    names = name.strip.downcase.split(" ")
     if names.length == 1
       search = "#{names[0]}%"
-      where('first_name LIKE ? OR last_name LIKE ?', search, search)
+      where('lower(first_name) LIKE ? OR lower(last_name) LIKE ?', search, search)
     else
-      where('first_name LIKE ? AND last_name LIKE ?', "#{names[0]}%", "#{names[1..names.length].join(" ")}%")
+      where('lower(first_name) LIKE ? AND lower(last_name) LIKE ?', "#{names[0]}%", "#{names[1..names.length].join(" ")}%")
     end
   end
 
