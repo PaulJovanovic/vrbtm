@@ -13,7 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.timeago
+//= require jquery.typeahead
 //= require turbolinks
+//= require handlebars
 //= require_tree .
 
 $(document).ready(function() {

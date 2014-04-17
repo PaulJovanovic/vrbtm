@@ -4,7 +4,7 @@ class Quote < ActiveRecord::Base
 
   def name
     if citable_type == "User"
-      "#{citable.first_name} #{citable.last_name}"
+      "(#{citable.name})"
     else
       citable.name
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407025511) do
+ActiveRecord::Schema.define(version: 20140407160723) do
 
   create_table "followers", force: true do |t|
     t.integer  "user_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20140407025511) do
   create_table "quotes", force: true do |t|
     t.string   "citable_type"
     t.integer  "citable_id"
-    t.string   "text"
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -21,6 +21,18 @@ group :development do
   gem 'pry-rails'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'vcr'
+  gem 'mocha', require: false
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'therubyracer'
+end
+
 group :production do
   gem 'newrelic_rpm'
 end

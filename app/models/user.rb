@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships
 
   def self.search_by_name(name)
-    names = name.split(" ")
+    names = name.strip.split(" ")
     if names.length == 1
       search = "#{names[0]}%"
-      find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ?', search, search])
+      where('first_name LIKE ? OR last_name LIKE ?', search, search)
     else
-      find(:all, :conditions => ['first_name LIKE ? AND last_name LIKE ?', "#{names[0]}%", "#{names[1..names.length].join(" ")}%"])
+      where('first_name LIKE ? AND last_name LIKE ?', "#{names[0]}%", "#{names[1..names.length].join(" ")}%")
     end
   end
 
@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
     Post.from_users_followed_by(self)
   end
 
-  def following?(user)
-    relationships.find_by(followed_id: user.id)
-  end
-
   def follow!(user)
     relationships.create!(followed_id: user.id)
   end
@@ -40,4 +36,7 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: user.id).destroy
   end
 
+  def following?(user)
+    relationships.where(followed_id: user.id).count == 1
+  end
 end

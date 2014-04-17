@@ -7,8 +7,8 @@
           <%= f.hidden_field :quote_id, class: "js-post-quote-id" %>
         <% end %>
         <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
-          <%= f.hidden_field :citable_type, value: "Source" %>
-          <%= f.hidden_field :citable_id, class: "js-quote-source-id" %>
+          <%= f.hidden_field :citable_type, class: "js-quote-citable-type", value: "Source" %>
+          <%= f.hidden_field :citable_id, class: "js-quote-citable-id" %>
           <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width" %>
           <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
           <div class="mtxxs text-right">
@@ -31,7 +31,7 @@
                 </div>
                 <%= link_to user_path(post.user), class: "fsxxxs fwl c-teal" do %>
                   <div>
-                    <%= "(#{post.user.first_name} #{post.user.last_name})" %>
+                    <%= post.user.name %>
                   </div>
                 <% end %>
                 <div class="mtxxxs fsxs c-2 lhxs">
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="mtxxxs fss fwl text-right">
-              -<%= post.quote.name %>
+              <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable_id), class: "c-teal" %>
             </div>
           </div>
         <% end %>
@@ -62,28 +62,86 @@
 </div>
 
 <script>
+  var users = new Bloodhound({
+    datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.value);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/sources/search?name=%QUERY',
+      filter: function (users) {
+        return $.map(users, function (user) {
+          return {
+            id: user.id,
+            name: user.name,
+            tokens: user.name.split(" ")
+          };
+        });
+      }
+    }
+  });
+
+  users.initialize();
+
+  $(".js-quote-source-name").keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
+  $('.js-quote-source-name').keyup(function(event) {
+    $(".js-quote-citable-id").val("");
+    if ($(this).val().trim().charAt(0) == '@') {
+      $(".js-quote-citable-type").val("User");
+    } else {
+      $(".js-quote-citable-type").val("Source");
+    }
+  });
+
+  $('.js-quote-source-name').typeahead(null, {
+    name: 'users',
+    source: users.ttAdapter(),
+    templates: {
+      suggestion: Handlebars.compile([
+        '<p>{{name}}</p>'
+      ].join(''))
+    }
+  }).on('typeahead:selected', function(event, selection) {
+    $(".js-quote-citable-id").val(selection.id);
+    $(".js-quote-source-name").val(selection.name);
+  });
+
   $("#quotes-create").on("ajax:success", function(event, data, status, xhr) {
     $(".js-post-quote-id").val(data.quote.id);
     $("#user-posts-create").submit();
   });
 
   $("#quotes-create input[type=submit]").click(function(event) {
-    event.preventDefault();
-    $.ajax({
-      type: "POST",
-      url: "<%= sources_path %>",
-      data: {
-        source: {
-          name: $(".js-quote-source-name").val()
-        }
-      }
-    }).success(function(data) {
-      console.log(data);
-      $(".js-quote-source-id").val(data.source.id);
+    var successTrigger = function(source_id) {
+      $(".js-quote-citable-id").val(source_id);
       $("#quotes-create").submit();
-    }).fail(function() {
-      alert("error");
-    });
+    };
+
+    event.preventDefault();
+    if ($(".js-quote-citable-id").val().length > 0) {
+      successTrigger($(".js-quote-citable-id").val());
+    }
+    else {
+      $.ajax({
+        type: "POST",
+        url: "<%= sources_path %>",
+        data: {
+          source: {
+            name: $(".js-quote-source-name").val()
+          }
+        }
+      }).success(function(data) {
+        successTrigger(data.source.id);
+      }).fail(function() {
+        alert("error");
+      });
+    }
     return false;
   });
 </script>

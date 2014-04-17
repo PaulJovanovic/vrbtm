@@ -21,7 +21,9 @@
             <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
           </div>
           <div class="pull-left">
-            <%= image_tag "logo_nav.png" %>
+            <%= link_to root_path do %>
+              <%= image_tag "logo_nav.png" %>
+            <% end %>
           </div>
           <!-- <div class="mlm pull-left">
             <%= form_for :user, url: "/" do |f| %>
