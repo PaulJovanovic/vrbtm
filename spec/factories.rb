@@ -3,6 +3,10 @@ FactoryGirl.define do
     "email#{n}@gmail.com"
   end
 
+  sequence :name do |n|
+    "name#{n}"
+  end
+
   factory :user do
     first_name "Paul"
     last_name "Jovanovic"
@@ -14,5 +18,9 @@ FactoryGirl.define do
   factory :relationship do
     association :follower
     association :followed
+  end
+
+  factory :source do
+    name
   end
 end

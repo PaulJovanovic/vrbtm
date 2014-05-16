@@ -64,7 +64,7 @@
 <script>
   var users = new Bloodhound({
     datumTokenizer: function (d) {
-        return Bloodhound.tokenizers.whitespace(d.value);
+      return Bloodhound.tokenizers.whitespace(d.value);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
@@ -128,12 +128,13 @@
       successTrigger($(".js-quote-citable-id").val());
     }
     else {
+      console.log($(".js-quote-source-name").val())
       $.ajax({
         type: "POST",
         url: "<%= sources_path %>",
         data: {
           source: {
-            name: $(".js-quote-source-name").val()
+            name: $(".js-quote-source-name").typeahead('val')
           }
         }
       }).success(function(data) {

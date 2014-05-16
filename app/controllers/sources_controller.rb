@@ -1,11 +1,11 @@
 class SourcesController < ApplicationController
 
   def create
-    source = Source.new(source_params)
-    if source.save
-      render json: { source: { id: source.id, name: source.name } }
+    @source = Source.exact_search_by_name(source_params[:name]).last || Source.create(source_params)
+    if @source.persisted?
+      render json: { id: @source.id, name: @source.name }
     else
-      render json: { errors: source.errors }, status: :unprocessable_entity
+      render json: { errors: @source.errors }, status: :unprocessable_entity
     end
   end
 
