@@ -10,7 +10,7 @@ class SourcesController < ApplicationController
   end
 
   def show
-    @source = Source.find(params[:id])
+    @source = Source.friendly.find(params[:id])
   end
 
   def search

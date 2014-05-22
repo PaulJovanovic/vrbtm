@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="mtxxxs fss fwl text-right">
-              <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable_id), class: "c-teal" %>
+              <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" %>
             </div>
           </div>
         <% end %>

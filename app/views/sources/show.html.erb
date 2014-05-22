@@ -1,12 +1,36 @@
+<div class="bg-16 text-center">
+  <div class="container phs pvxxl">
+    <div class="fsxxl">
+      <%= @source.name %>
+    </div>
+  </div>
+</div>
 <div class="container phs">
   <div class="row nmhxs mtm">
     <div class="col-xs-8 phxs">
-      <div class="fsm">
-        <span class="c-8">This would be the page for </span><%= @source.name %>
-      </div>
+      <% @source.quotes.order("created_at desc").each do |quote| %>
+        <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+          <div class="row nmhxxxs">
+            <div class="col-xs-2 phxxxs">
+              <div class="mtxs-plus">
+                <i class="fa fa-comment"></i> 1
+              </div>
+              <div class="mtxs-plus">
+                <i class="fa fa-star"></i> 1
+              </div>
+            </div>
+            <div class="col-xs-10 phxxxs">
+              <div class="fsxs c-2 lhxs">
+                <i class="fa fa-quote-left c-10"></i>
+                  <%= quote.text %>
+                <i class="fa fa-quote-right c-10"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="col-xs-4 phxs">
-
     </div>
   </div>
 </div>
