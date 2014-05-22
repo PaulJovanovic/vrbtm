@@ -113,7 +113,7 @@
   });
 
   $("#quotes-create").on("ajax:success", function(event, data, status, xhr) {
-    $(".js-post-quote-id").val(data.quote.id);
+    $(".js-post-quote-id").val(data.id);
     $("#user-posts-create").submit();
   });
 
@@ -128,17 +128,17 @@
       successTrigger($(".js-quote-citable-id").val());
     }
     else {
-      console.log($(".js-quote-source-name").val())
+      console.log($("#quote_name").val());
       $.ajax({
         type: "POST",
         url: "<%= sources_path %>",
         data: {
           source: {
-            name: $(".js-quote-source-name").typeahead('val')
+            name: $("#quote_name").val()
           }
         }
       }).success(function(data) {
-        successTrigger(data.source.id);
+        successTrigger(data.id);
       }).fail(function() {
         alert("error");
       });
