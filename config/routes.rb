@@ -1,5 +1,7 @@
 Vrbtm::Application.routes.draw do
   resources :posts
+  delete "likes", to: "likes#destroy"
+  resources :likes
   get "sources/search", to: "sources#search"
   resources :sources
   resources :quotes

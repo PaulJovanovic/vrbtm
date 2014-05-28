@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522225017) do
+ActiveRecord::Schema.define(version: 20140527233708) do
 
   create_table "followers", force: true do |t|
     t.integer  "user_id"
@@ -33,11 +33,22 @@ ActiveRecord::Schema.define(version: 20140522225017) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "likes", force: true do |t|
+    t.string   "likable_type"
+    t.integer  "likable_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["likable_type", "likable_id", "user_id"], name: "index_likes_on_likable_type_and_likable_id_and_user_id", unique: true, using: :btree
+
   create_table "posts", force: true do |t|
     t.integer  "quote_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "likes_count", default: 0
   end
 
   create_table "quotes", force: true do |t|

@@ -7,12 +7,17 @@ FactoryGirl.define do
     "name#{n}"
   end
 
-  factory :user do
-    first_name "Paul"
-    last_name "Jovanovic"
-    email
-    password "password"
-    password_confirmation "password"
+  factory :like do
+    association :user
+  end
+
+  factory :post do
+    association :quote
+    association :user
+  end
+
+  factory :quote do
+    text "Quote Text"
   end
 
   factory :relationship do
@@ -22,5 +27,13 @@ FactoryGirl.define do
 
   factory :source do
     name
+  end
+
+  factory :user do
+    first_name "Paul"
+    last_name "Jovanovic"
+    email
+    password "password"
+    password_confirmation "password"
   end
 end
