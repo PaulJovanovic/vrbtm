@@ -3,7 +3,6 @@
     <div class="col-sm-7 phxs">
       <div class="mtm phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
         <%= form_for :post, url: posts_path, method: :post, html: { id: "user-posts-create" } do |f| %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :quote_id, class: "js-post-quote-id" %>
         <% end %>
         <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
@@ -48,7 +47,7 @@
               <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "js-like" } do |f| %>
                 <%= f.hidden_field :likable_type, value: "Post", class: "js-like-likable-type" %>
                 <%= f.hidden_field :likable_id, value: post.id, class: "js-like-likable-id" %>
-                <%= f.submit post.liked_by?(current_user) ? "Unlike" : "Like", class: "c-teal pan bg-n js-like-submit" %>
+                <%= f.submit post.liked_by?(current_user) ? "Unlike" : "Like", class: "c-teal bg-n pan js-like-submit" %>
               <% end %>
             </div>
             <div id="Post-<%= post.id %>-likes" class="<%= "hide" if post.likes_count == 0 %>">

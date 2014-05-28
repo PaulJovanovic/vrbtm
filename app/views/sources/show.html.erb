@@ -8,25 +8,29 @@
 <div class="container phs">
   <div class="row nmhxs mtm">
     <div class="col-xs-8 phxs">
-      <% @source.quotes.order("created_at desc").each do |quote| %>
+      <% @source.quotes.order("posts_count desc").each do |quote| %>
         <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
-          <div class="row nmhxxxs">
-            <div class="col-xs-2 phxxxs">
-              <div class="mtxs-plus">
-                <i class="fa fa-comment"></i> 1
-              </div>
-              <div class="mtxs-plus">
-                <i class="fa fa-star"></i> 1
-              </div>
-            </div>
-            <div class="col-xs-10 phxxxs">
-              <div class="fsxs c-2 lhxs">
-                <i class="fa fa-quote-left c-10"></i>
-                  <%= quote.text %>
-                <i class="fa fa-quote-right c-10"></i>
-              </div>
-            </div>
+          <div class="fsxs c-2 lhxs">
+            <i class="fa fa-quote-left c-10"></i>
+              <%= quote.text %>
+            <i class="fa fa-quote-right c-10"></i>
           </div>
+          <table class="mtxs">
+            <tr>
+              <td>
+                <i class="fa fa-comment"></i> <%= quote.posts_count %>
+              </td>
+              <td class="phxxxs">
+                -
+              </td>
+              <td>
+                <%= form_for :post, url: posts_path do |f| %>
+                  <%= f.hidden_field :quote_id, value: quote.id %>
+                  <%= f.submit "Quote", class: "c-teal bg-n pan" %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
         </div>
       <% end %>
     </div>

@@ -1,8 +1,10 @@
 class Post < ActiveRecord::Base
   belongs_to :user
-  belongs_to :quote
+  belongs_to :quote, counter_cache: true
   has_many :likes, as: :likable
   accepts_nested_attributes_for :quote
+
+  validates :user, :quote, presence: true
 
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
