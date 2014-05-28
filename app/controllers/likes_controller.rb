@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
 
   def create
-    like = Like.new(like_params.merge({user_id: current_user.id}))
+    like = Like.new(like_params)
 
     if like.save
       render json: { id: like.id }
@@ -23,6 +23,6 @@ class LikesController < ApplicationController
   private
 
   def like_params
-    params.require(:like).permit(:likable_type, :likable_id)
+    params.require(:like).permit(:likable_type, :likable_id).merge({user_id: current_user.id})
   end
 end

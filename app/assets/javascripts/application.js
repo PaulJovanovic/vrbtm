@@ -16,6 +16,7 @@
 //= require jquery.typeahead
 //= require turbolinks
 //= require handlebars
+//= require like
 //= require_tree .
 
 $(document).ready(function() {
