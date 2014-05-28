@@ -9,32 +9,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to "#" do %>
-    <div class="pvxxxs c-16 bg-teal text-center">
-      This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
-    </div>
-  <% end %>
-  <% if signed_in? %>
-    <div class="bg-2">
-      <div class="container phs">
-        <div class="pvxs dvm">
-          <div class="pull-right">
-            <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
+  <div class="pbxxl">
+    <%= link_to "#" do %>
+      <div class="pvxxxs c-16 bg-teal text-center">
+        This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
+      </div>
+    <% end %>
+    <% if signed_in? %>
+      <div class="bg-2">
+        <div class="container phs">
+          <div class="pvxs dvm">
+            <div class="pull-right">
+              <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
+            </div>
+            <div class="pull-left">
+              <%= link_to root_path do %>
+                <%= image_tag "logo_nav.png" %>
+              <% end %>
+            </div>
+            <!-- <div class="mlm pull-left">
+              <%= form_for :user, url: "/" do |f| %>
+                <%= f.text_field :name, name: "name", class: "pvxxxxs phs fsxxs c-12 bg-8 bras" %>
+              <% end %>
+            </div> -->
           </div>
-          <div class="pull-left">
-            <%= link_to root_path do %>
-              <%= image_tag "logo_nav.png" %>
-            <% end %>
-          </div>
-          <!-- <div class="mlm pull-left">
-            <%= form_for :user, url: "/" do |f| %>
-              <%= f.text_field :name, name: "name", class: "pvxxxxs phs fsxxs c-12 bg-8 bras" %>
-            <% end %>
-          </div> -->
         </div>
       </div>
-    </div>
-  <% end %>
-  <%= yield %>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>
