@@ -14,7 +14,6 @@ class Like
       @toggleMethod()
 
     @form.on "ajax:error", (event, xhr, status, error) =>
-      @toggleMethod()
       @updateCounter()
       @toggleText()
 
