@@ -20,7 +20,9 @@
           <div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
             <div class="row nmhxxxs">
               <div class="col-xs-2 col-md-1 phxxxs">
-                <%= image_tag "avatar.jpg", class: "img-responsive" %>
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag "avatar.jpg", class: "img-responsive" %>
+                <% end %>
               </div>
               <div class="col-xs-10 col-md-11 phxxxs">
                 <div class="fsxxxxs fws c-8 pull-right">
