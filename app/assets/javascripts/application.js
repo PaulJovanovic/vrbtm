@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery_ujs
-//= require turbolinks
 //= require handlebars
 //= require jquery.timeago
 //= require jquery.typeahead
