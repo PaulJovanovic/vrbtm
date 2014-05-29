@@ -23,23 +23,47 @@
 <div class="container phxs">
   <div class="row nmhxs mtm">
     <div class="col-sm-7 phxs">
-      <% @user.quotes.order("created_at desc").each do |quote| %>
-        <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+      <% @posts.each do |post| %>
+        <div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
           <div class="row nmhxxxs">
-            <div class="col-xs-2 phxxxs">
-              <div class="mtxs-plus">
-                <i class="fa fa-comment"></i> 1
-              </div>
-              <div class="mtxs-plus">
-                <i class="fa fa-star"></i> 1
-              </div>
+            <div class="col-xs-2 col-md-1 phxxxs">
+              <%= link_to user_path(post.user) do %>
+                <%= image_tag "avatar.jpg", class: "img-responsive" %>
+              <% end %>
             </div>
-            <div class="col-xs-10 phxxxs">
-              <div class="fsxs c-2 lhxs">
+            <div class="col-xs-10 col-md-11 phxxxs">
+              <div class="fsxxxxs fws c-8 pull-right">
+                <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+                  <%= post.created_at.to_s %>
+                </abbr>
+              </div>
+              <%= link_to user_path(post.user), class: "fsxxxs fwl c-teal" do %>
+                <div>
+                  <%= post.user.name %>
+                </div>
+              <% end %>
+              <div class="mtxxxs fsxs c-2 lhxs">
                 <i class="fa fa-quote-left c-10"></i>
-                  <%= quote.text %>
+                  <%= post.quote.text %>
                 <i class="fa fa-quote-right c-10"></i>
               </div>
+            </div>
+          </div>
+          <div class="row nmhxxs mtxxxs fss fwl">
+            <div class="col-xs-6 phxxs">
+              <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like" } do |f| %>
+                <%= f.hidden_field :likable_type, value: "Post" %>
+                <%= f.hidden_field :likable_id, value: post.id %>
+                <%= link_to "#", class: "js-like-submit#{ " active" if post.liked_by?(current_user) }", title: "Favorite" do %>
+                  <i class="fa fa-star c-10 c-teal-active"></i>
+                <% end %>
+                <span class="js-like-count<%= " hide" if post.likes_count == 0 %>">
+                  <%= post.likes_count %>
+                </span>
+              <% end %>
+            </div>
+            <div class="col-xs-6 phxxs text-right">
+              <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" %>
             </div>
           </div>
         </div>
