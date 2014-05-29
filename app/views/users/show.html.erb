@@ -1,21 +1,95 @@
-<div class="bg-16 text-center">
-  <div class="container phxs pvxxl">
-    <div class="relative">
-      <div class="fsxxl">
+<div class="container phxs">
+  <div class="row mhn bg-16">
+    <div class="col-md-10 phn pvxxl bg-teal">
+      <div class="text-center">
+        <%= image_tag "avatar.jpg", class: "daxxxl bss bwam bc-16" %>
+      </div>
+      <div class="mts fsl fwl c-16 text-center" style="text-shadow: 1px 1px #000000;">
         <%= @user.name %>
       </div>
-      <div class="absolute left full-width text-center">
-        <% unless current_user.following?(@user) %>
-          <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
-            <%= f.hidden_field :followed_id %>
-            <%= f.submit "Follow", class: "btn btn-primary" %>
-          <% end %>
-        <% else %>
-          <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
-               html: { method: :delete }) do |f| %>
-            <%= f.submit "Unfollow", class: "btn btn-primary" %>
+      <div class="relative mts">
+        <div class="absolute fill bg-1 fade-s zxs"></div>
+        <div class="row nmhxxs pvxs zs">
+          <div class="col-sm-8 col-sm-offset-2 phxxs c-12">
+            <div class="phxs fws">
+              "Sometimes I can only throw as fast as my arm will let me."
+            </div>
+          </div>
+          <div class="col-sm-8 col-sm-offset-2 phxxs text-right c-16">
+            <div class="phxs">
+              Dennis Quade
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 phn text-center hidden-xs hidden-sm">
+      <div class="pvxs phs">
+        <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+          <div class="fss fwl c-teal">
+            <%= @user.posts.count %>
+          </div>
+          <div class="fsxs fwl">
+            posts
+          </div>
+        </div>
+        <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+          <div class="fss fwl c-teal">
+            <%= @user.followers.count %>
+          </div>
+          <div class="fsxs fwl">
+            followers
+          </div>
+        </div>
+        <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+          <div class="fss fwl c-teal">
+            <%= @user.followeds.count %>
+          </div>
+          <div class="fsxs fwl">
+            following
+          </div>
+        </div>
+        <% if current_user.id != @user.id %>
+          <% unless current_user.following?(@user) %>
+            <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+              <%= f.hidden_field :followed_id %>
+              <%= f.submit "Follow", class: "btn btn-primary mtm full-width" %>
+            <% end %>
+          <% else %>
+            <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
+                 html: { method: :delete }) do |f| %>
+              <%= f.submit "Unfollow", class: "btn btn-primary mtm full-width" %>
+            <% end %>
           <% end %>
         <% end %>
+      </div>
+    </div>
+    <div class="paxs bg-16 hidden-md hidden-lg">
+      <div class="row nmhxxs">
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.posts.count %>
+          </div>
+          <div class="fsxs fwl">
+            posts
+          </div>
+        </div>
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.followers.count %>
+          </div>
+          <div class="fsxs fwl">
+            followers
+          </div>
+        </div>
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.followeds.count %>
+          </div>
+          <div class="fsxs fwl">
+            following
+          </div>
+        </div>
       </div>
     </div>
   </div>
