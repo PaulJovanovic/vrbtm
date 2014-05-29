@@ -45,18 +45,15 @@
             </div>
             <div class="">
               <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "js-like" } do |f| %>
-                <%= f.hidden_field :likable_type, value: "Post", class: "js-like-likable-type" %>
-                <%= f.hidden_field :likable_id, value: post.id, class: "js-like-likable-id" %>
-                <%= f.submit post.liked_by?(current_user) ? "Unlike" : "Like", class: "c-teal bg-n pan js-like-submit" %>
+                <%= f.hidden_field :likable_type, value: "Post" %>
+                <%= f.hidden_field :likable_id, value: post.id %>
+                <%= link_to "#", class: "js-like-submit#{ " active" if post.liked_by?(current_user) }" do %>
+                  <i class="fa fa-star c-teal-active"></i>
+                <% end %>
+                <span class="js-like-count<%= " hide" if post.likes_count == 0 %>">
+                  <%= post.likes_count %>
+                </span>
               <% end %>
-            </div>
-            <div id="Post-<%= post.id %>-likes" class="<%= "hide" if post.likes_count == 0 %>">
-              <span class="js-like-count">
-                <%= post.likes_count %>
-              </span>
-              <span class="js-like-text">
-                <%= "like".pluralize(post.likes_count) %>
-              </span>
             </div>
           </div>
         <% end %>

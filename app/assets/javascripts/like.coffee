@@ -3,37 +3,36 @@ class Like
     if @form.find("input[name=_method]").length == 0
       @form.append("<input type='hidden' name='_method' value='post'/>")
     @method = @form.find("input[name=_method]")
-    @counter = $("#" + @form.find(".js-like-likable-type").val() + "-" + @form.find(".js-like-likable-id").val() + "-likes")
-    @counterCount = @counter.find(".js-like-count")
+    @count = @form.find(".js-like-count")
+
+    @form.find(".js-like-submit").click (e)=>
+      e.preventDefault()
+      @form.submit()
 
     @form.on "submit", =>
       @updateCounter()
-      @toggleText()
+      @toggleActive()
 
     @form.on "ajax:success", (event, data, status, xhr) =>
       @toggleMethod()
 
     @form.on "ajax:error", (event, xhr, status, error) =>
       @updateCounter()
-      @toggleText()
+      @toggleActive()
 
 
   methodIsPost: ->
     @method.val() == "post"
 
   displayCount: (count) ->
-    @counterCount.html(count)
+    @count.html(count)
     if count > 0
-      if count == 1
-        @counter.find(".js-like-text").html("like")
-        @counter.removeClass("hide")
-      else if count == 2
-        @counter.find(".js-like-text").html("likes")
+      @count.removeClass("hide")
     else
-      @counter.addClass("hide")
+      @count.addClass("hide")
 
   updateCounter: ->
-    count = parseInt(@counterCount.html())
+    count = parseInt(@count.html())
     if @methodIsPost()
       count++
     else
@@ -46,11 +45,11 @@ class Like
     else
       @method.val("post")
 
-  toggleText: ->
+  toggleActive: ->
     if @methodIsPost()
-      @form.find(".js-like-submit").val("Unlike");
+      @form.find(".js-like-submit").addClass("active");
     else
-      @form.find(".js-like-submit").val("Like");
+      @form.find(".js-like-submit").removeClass("active");
 
 $(document).ready ->
   $(".js-like").each ->
