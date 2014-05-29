@@ -8,23 +8,14 @@
   <div class="row nmhxs">
     <div class="col-sm-6 phxs mtxs">
       <div class="fsxxxxs c-16">
-        <table class="full-width">
-          <tr>
-            <td>
-              <%= f.check_box :remember_me %>
-            </td>
-            <td class="plxxs">
-              Remember Me
-            </td>
-          </tr>
-        </table>
+        <%= f.check_box :remember_me %> Remember Me
       </div>
       <div class="mtxxxxs fsxxxxs c-16">
         <%= link_to "Forgot password?", "#", class: "c-teal" %>
       </div>
     </div>
     <div class="col-sm-6 phxs mtxs">
-      <%= f.submit "sign in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
+      <%= f.submit "log in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
     </div>
   </div>
 <% end %>

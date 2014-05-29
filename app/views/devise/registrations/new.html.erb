@@ -1,5 +1,51 @@
-<h2>Sign up</h2>
-
-<%= render "form" %>
-
-<%= render "devise/shared/links" %>
+<div class="bg-2 full">
+  <div class="container phxs">
+    <div class="dvxxxl hidden-xs"></div>
+    <div class="dvm visible-xs"></div>
+    <div class="row nmhxs">
+      <div class="col-sm-8 col-sm-offset-2 phxs">
+        <div class="row nmhxs">
+          <div class="col-sm-6 col-md-5 col-md-offset-1 phxs mtm">
+            <%= image_tag "logo_big.png" %>
+            <div class="mtm c-16 lhxs" style="font-size: 13px;">
+              An entire social network between quotation marks.
+            </div>
+          </div>
+          <div class="col-sm-5 col-sm-offset-1 phxs mtm">
+            <%= render "form" %>
+            <div class="mtl">
+              <%= link_to "#" do %>
+                <div>
+                  <table>
+                    <tr>
+                      <td>
+                        <i class="fa fa-facebook-square c-16 fsxxl"></i>
+                      </td>
+                      <td class="plm fsxxxs fwl c-16">
+                        Log in with Facebook
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              <% end %>
+              <%= link_to new_session_path(resource_name), id: "email-sign-up" do %>
+                <div class="mtxs">
+                  <table>
+                    <tr>
+                      <td>
+                        <i class="fa fa-envelope c-16 fsxl"></i>
+                      </td>
+                      <td class="plm fsxxxs fwl c-16">
+                        Log in with email
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

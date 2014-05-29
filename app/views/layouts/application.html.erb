@@ -9,29 +9,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="pbxxl">
-    <%= link_to "#" do %>
-      <div class="pvxxxs c-16 bg-teal text-center">
-        This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
-      </div>
-    <% end %>
-    <% if signed_in? %>
-      <div class="bg-2">
-        <div class="container phxs">
-          <div class="pvxs dvm">
-            <div class="pull-right">
-              <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
-            </div>
-            <div class="pull-left">
-              <%= link_to root_path do %>
-                <%= image_tag "logo_nav.png" %>
-              <% end %>
-            </div>
+  <%= link_to "#" do %>
+    <div class="pvxxxs c-16 bg-teal text-center">
+      This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
+    </div>
+  <% end %>
+  <% if signed_in? %>
+    <div class="bg-2">
+      <div class="container phxs">
+        <div class="pvxs dvm">
+          <div class="pull-right">
+            <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
+          </div>
+          <div class="pull-left">
+            <%= link_to root_path do %>
+              <%= image_tag "logo_nav.png" %>
+            <% end %>
           </div>
         </div>
       </div>
-    <% end %>
-    <%= yield %>
-  </div>
+    </div>
+  <% end %>
+  <%= yield %>
 </body>
 </html>
