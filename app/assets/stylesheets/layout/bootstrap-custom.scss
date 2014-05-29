@@ -81,18 +81,6 @@ body {
     left: 1px;
   }
 
-  @media (min-width: 680px) {
-    .container {
-      width: 680px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .navbar-nav > li {
-      border-left: 1px solid #4c4c4c;
-    }
-  }
-
   @media (min-width: 992px) {
     .container {
       width: 960px;

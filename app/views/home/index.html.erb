@@ -17,12 +17,12 @@
       </div>
       <div class="mtm">
         <% @posts.order("created_at desc").each do |post| %>
-          <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+          <div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
             <div class="row nmhxxxs">
-              <div class="col-xs-1 phxxxs">
-                <div class="dvm bg-2"></div>
+              <div class="col-xs-2 col-md-1 phxxxs">
+                <%= image_tag "avatar.jpg", class: "img-responsive" %>
               </div>
-              <div class="col-xs-11 phxxxs">
+              <div class="col-xs-10 col-md-11 phxxxs">
                 <div class="fsxxxxs fws c-8 pull-right">
                   <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
                     <%= post.created_at.to_s %>
