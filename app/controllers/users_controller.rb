@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @posts = Post.joins(:quote).where("(quotes.citable_type = 'User' AND quotes.citable_id = ?) OR posts.user_id = ?", @user.id, @user.id).order("posts.created_at desc")
+    @posts = Post.joins(:quote).where("(quotes.citable_type = 'User' AND quotes.citable_id = ?) OR posts.user_id = ?", @user.id, @user.id).paginate(page: params[:page], per_page: 10).order("posts.created_at desc")
   end
 
   def search

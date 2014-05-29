@@ -19,6 +19,11 @@
       <div class="container phxs">
         <div class="pvxs dvm">
           <div class="pull-right">
+            <%= link_to user_path(current_user), class: "c-16" do %>
+              <%= image_tag "avatar.jpg", class: "daxs" %>
+              <%= current_user.name %>
+            <% end %>
+            &nbsp;
             <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
           </div>
           <div class="pull-left">

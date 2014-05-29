@@ -16,7 +16,7 @@
         <% end %>
       </div>
       <div class="mtm">
-        <% @posts.order("created_at desc").each do |post| %>
+        <% @posts.each do |post| %>
           <div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
             <div class="row nmhxxxs">
               <div class="col-xs-2 col-md-1 phxxxs">
@@ -61,6 +61,9 @@
             </div>
           </div>
         <% end %>
+        <div class="text-center">
+          <%= will_paginate @posts %>
+        </div>
       </div>
     </div>
     <div class="col-sm-5 phxs mtm">
