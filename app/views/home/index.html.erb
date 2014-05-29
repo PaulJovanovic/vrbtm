@@ -40,20 +40,22 @@
                 </div>
               </div>
             </div>
-            <div class="mtxxxs fss fwl text-right">
-              <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" %>
-            </div>
-            <div class="">
-              <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "js-like" } do |f| %>
-                <%= f.hidden_field :likable_type, value: "Post" %>
-                <%= f.hidden_field :likable_id, value: post.id %>
-                <%= link_to "#", class: "js-like-submit#{ " active" if post.liked_by?(current_user) }" do %>
-                  <i class="fa fa-star c-teal-active"></i>
+            <div class="row nmhxxs mtxxxs fss fwl">
+              <div class="col-xs-6 phxxs">
+                <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like" } do |f| %>
+                  <%= f.hidden_field :likable_type, value: "Post" %>
+                  <%= f.hidden_field :likable_id, value: post.id %>
+                  <%= link_to "#", class: "js-like-submit#{ " active" if post.liked_by?(current_user) }", title: "Favorite" do %>
+                    <i class="fa fa-star c-10 c-teal-active"></i>
+                  <% end %>
+                  <span class="js-like-count<%= " hide" if post.likes_count == 0 %>">
+                    <%= post.likes_count %>
+                  </span>
                 <% end %>
-                <span class="js-like-count<%= " hide" if post.likes_count == 0 %>">
-                  <%= post.likes_count %>
-                </span>
-              <% end %>
+              </div>
+              <div class="col-xs-6 phxxs text-right">
+                <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" %>
+              </div>
             </div>
           </div>
         <% end %>
