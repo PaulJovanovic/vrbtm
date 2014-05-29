@@ -1,6 +1,6 @@
 <div class="container phxs">
   <div class="row mhn bg-16">
-    <div class="col-md-10 phn pvxxl bg-teal">
+    <div class="col-sm-10 phn pvxxl bg-teal">
       <div class="text-center">
         <%= image_tag "avatar.jpg", class: "daxxxl bss bwam bc-16" %>
       </div>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2 phn text-center hidden-xs hidden-sm">
+    <div class="col-sm-2 phn text-center hidden-xs">
       <div class="pvxs phs">
         <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
           <div class="fss fwl c-teal">
@@ -50,48 +50,7 @@
           </div>
         </div>
         <% if current_user.id != @user.id %>
-          <% unless current_user.following?(@user) %>
-            <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
-              <%= f.hidden_field :followed_id %>
-              <%= f.submit "Follow", class: "btn btn-primary mtm full-width" %>
-            <% end %>
-          <% else %>
-            <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
-                 html: { method: :delete }) do |f| %>
-              <%= f.submit "Unfollow", class: "btn btn-primary mtm full-width" %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="paxs bg-16 hidden-md hidden-lg">
-      <div class="row nmhxxs">
-        <div class="col-xs-3 phxxs bss bwls-plus bc-teal text-center">
-          <div class="fss fwl c-teal">
-            <%= @user.posts.count %>
-          </div>
-          <div class="fsxs fwl">
-            posts
-          </div>
-        </div>
-        <div class="col-xs-3 phxxs bss bwls-plus bc-teal text-center">
-          <div class="fss fwl c-teal">
-            <%= @user.followers.count %>
-          </div>
-          <div class="fsxs fwl">
-            followers
-          </div>
-        </div>
-        <div class="col-xs-3 phxxs bss bwls-plus bc-teal text-center">
-          <div class="fss fwl c-teal">
-            <%= @user.followeds.count %>
-          </div>
-          <div class="fsxs fwl">
-            following
-          </div>
-        </div>
-        <div class="col-xs-3 phxxs">
-          <% if current_user.id != @user.id %>
+          <div class="mtm">
             <% unless current_user.following?(@user) %>
               <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
                 <%= f.hidden_field :followed_id %>
@@ -103,10 +62,55 @@
                 <%= f.submit "Unfollow", class: "btn btn-primary full-width" %>
               <% end %>
             <% end %>
-          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="visible-xs">
+    <div class="paxs bg-16">
+      <div class="row nmhxxs">
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.posts.count %>
+          </div>
+          <div class="fsxs fwl">
+            posts
+          </div>
+        </div>
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.followers.count %>
+          </div>
+          <div class="fsxs fwl">
+            followers
+          </div>
+        </div>
+        <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+          <div class="fss fwl c-teal">
+            <%= @user.followeds.count %>
+          </div>
+          <div class="fsxs fwl">
+            following
+          </div>
         </div>
       </div>
     </div>
+    <% if current_user.id != @user.id %>
+      <div class="mts">
+        <% unless current_user.following?(@user) %>
+          <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+            <%= f.hidden_field :followed_id %>
+            <%= f.submit "Follow", class: "btn btn-primary full-width" %>
+          <% end %>
+        <% else %>
+          <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
+               html: { method: :delete }) do |f| %>
+            <%= f.submit "Unfollow", class: "btn btn-primary full-width" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 <div class="container phxs">
