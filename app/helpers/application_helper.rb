@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def number_to_shorthand(number)
+    number_to_human(number, units: {thousand: "K", million: "M"}, precision: 2)
+  end
+
   def resource_name
     :user
   end
