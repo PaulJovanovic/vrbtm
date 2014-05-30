@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
+  belongs_to :origin_user, class_name: "User"
   belongs_to :quote, counter_cache: true
   has_many :likes, as: :likable
   accepts_nested_attributes_for :quote
@@ -11,6 +12,18 @@ class Post < ActiveRecord::Base
                          WHERE follower_id = :user_id"
     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id",
           user_id: user.id)
+  end
+
+  def user_name
+    if origin_user
+      origin_user.name
+    else
+      user.name
+    end
+  end
+
+  def posted_by_user
+    origin_user || user
   end
 
   def liked_by?(user)
