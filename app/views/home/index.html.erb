@@ -25,7 +25,19 @@
       </div>
     </div>
     <div class="col-sm-4 phxs mtm">
-      <div class="bss bwhs bwts bwbm bc-2">
+      <div class="mtxs-plus bss bwhs bwts bwbm bc-2">
+        <div class="paxxs bg-16">
+          Trending
+        </div>
+        <div class="paxxs bg-16 bss bwts bc-12">
+          <% @trending_sources.each do |key, value| %>
+            <div class="mtxs-plus">
+              <%= link_to key[1], source_path(key[0]), class: "c-teal" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="mtxs-plus bss bwhs bwts bwbm bc-2">
         <div class="paxxs bg-16">
           Suggested People
         </div>

@@ -2,6 +2,7 @@ class Source < ActiveRecord::Base
   extend FriendlyId
 
   has_many :quotes, as: :citable
+  has_many :posts, through: :quotes
 
   validates :name, presence: true
 

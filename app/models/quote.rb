@@ -1,6 +1,7 @@
 class Quote < ActiveRecord::Base
   has_many :posts
   belongs_to :citable, polymorphic: true
+  belongs_to :source, foreign_key: 'citable_id', foreign_type: 'citable_type'
 
   def name
     if citable_type == "User"
