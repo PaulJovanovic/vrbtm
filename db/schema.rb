@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20140529215904) do
 
   create_table "assets", force: true do |t|
+    t.string   "type"
     t.string   "assetable_type"
     t.integer  "assetable_id"
     t.string   "attachment_file_name"

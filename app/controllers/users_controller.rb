@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:favorite_quote, :favorite_quote_author, avatar_attributes: [:attachment], cover_photo_attributes: [:attachment])
+    params.require(:user).permit(:favorite_quote, :favorite_quote_author, avatar_attributes: [:id, :attachment], cover_photo_attributes: [:id, :attachment])
   end
 
   def authorize_user
