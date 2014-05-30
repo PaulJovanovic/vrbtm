@@ -114,7 +114,7 @@ $(document).ready(function() {
     else {
       $.ajax({
         type: "POST",
-        url: "<%= sources_path %>",
+        url: "/sources",
         data: {
           source: {
             name: $("#quote_name").val()
