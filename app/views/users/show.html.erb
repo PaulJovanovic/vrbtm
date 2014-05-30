@@ -1,8 +1,8 @@
 <div class="container phxs">
   <div class="row mhn bg-16">
-    <div class="col-sm-10 phn pvxxl bg-teal">
+    <div class="col-sm-10 phn pvxxl bg-teal bg-cover" style="background-image: url('<%= cover_image(@user) %>')">
       <div class="text-center">
-        <%= image_tag "avatar.jpg", class: "daxxxl bss bwam bc-16" %>
+        <%= image_tag avatar_image(@user), class: "daxxxl bss bwam bc-16" %>
       </div>
       <div class="mts fsl fwl c-16 text-center" style="text-shadow: 1px 1px #000000;">
         <%= @user.name %>

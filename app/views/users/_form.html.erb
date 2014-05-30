@@ -1,0 +1,53 @@
+<%= form_for @user, html: {:multipart => true} do |f| %>
+  <div class="row nmhxxs">
+    <div class="col-sm-6 phxxs mtxs">
+      <div class="row nmhxxs mtxs-plus">
+        <div class="col-sm-3 phxxs fsxxxs">
+          Profile Picture
+        </div>
+        <div class="col-sm-9 phxxs">
+          <%= f.fields_for :avatar do |avatar_fields| %>
+            <%= avatar_fields.file_field :attachment %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row nmhxxs mtxs-plus">
+        <div class="col-sm-3 phxxs fsxxxs">
+          Cover Photo
+        </div>
+        <div class="col-sm-9 phxxs">
+          <%= f.fields_for :cover_photo do |cover_photo_fields| %>
+            <%= cover_photo_fields.file_field :attachment %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 phxxs mtxs">
+      <div class="row nmhxxs mtxs-plus">
+        <div class="col-sm-3 phxxs fsxxxs">
+          Favorite Quote
+          <br/>
+          <span class="fsxxs c-10">
+            (255 characters max)
+          </span>
+        </div>
+        <div class="col-sm-9 phxxs">
+          <%= f.text_area :favorite_quote, class: "paxxxs bss bwas bc-2 full-width" %>
+        </div>
+      </div>
+      <div class="row nmhxxs mtxs-plus">
+        <div class="col-sm-3 phxxs fsxxxs">
+          Favorite Quote Author
+        </div>
+        <div class="col-sm-9 phxxs">
+          <%= f.text_area :favorite_quote_author, class: "paxxxs bss bwas bc-2 full-width" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row nmhxxs mtm">
+    <div class="col-sm-6 col-sm-offset-6 phxxs">
+      <%= f.submit "Save Changes", class: "btn btn-primary full-width" %>
+    </div>
+  </div>
+<% end %>

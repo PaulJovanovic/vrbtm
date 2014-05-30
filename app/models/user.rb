@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :followeds, through: :relationships
   has_many :followers, through: :reverse_relationships
 
+  has_one :avatar, :as => :assetable, :class_name => "Avatar", :dependent => :destroy
+  has_one :cover_photo, :as => :assetable, :class_name => "CoverPhoto", :dependent => :destroy
+
+  accepts_nested_attributes_for :avatar, :cover_photo
+
   def self.search_by_name(name)
     names = name.strip.downcase.split(" ")
     if names.length == 1

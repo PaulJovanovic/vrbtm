@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528162352) do
+ActiveRecord::Schema.define(version: 20140529215904) do
+
+  create_table "assets", force: true do |t|
+    t.string   "assetable_type"
+    t.integer  "assetable_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
 
   create_table "followers", force: true do |t|
     t.integer  "user_id"
@@ -93,6 +102,8 @@ ActiveRecord::Schema.define(version: 20140528162352) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "favorite_quote"
+    t.string   "favorite_quote_author"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

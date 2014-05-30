@@ -16,6 +16,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'friendly_id'
 gem 'will_paginate', '~> 3.0'
+gem "paperclip"
+gem 'aws-sdk'
 
 group :development do
   gem 'mysql2'

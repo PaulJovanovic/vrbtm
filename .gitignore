@@ -22,7 +22,7 @@ redis.pid.lock
 .rbenv-version
 .ruby-version
 .ruby-gemset
-public/old_assets
+public/system
 .floo
 .flooignore
 .sublime-project
