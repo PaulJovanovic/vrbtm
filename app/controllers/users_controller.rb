@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @user.build_avatar if @user.avatar.nil?
+    @user.build_cover_photo if @user.cover_photo.nil?
   end
 
   def update
