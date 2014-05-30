@@ -123,7 +123,7 @@
 </div>
 <div class="container phxs pbxxl">
   <div class="row nmhxs mtm">
-    <div class="col-sm-7 phxs">
+    <div class="col-sm-8 phxs">
       <% @posts.each do |post| %>
         <%= render partial: "posts/quote", locals: { post: post } %>
       <% end %>
@@ -131,7 +131,7 @@
         <%= will_paginate @posts %>
       </div>
     </div>
-    <div class="col-sm-5 phxs">
+    <div class="col-sm-4 phxs">
     </div>
   </div>
 </div>
