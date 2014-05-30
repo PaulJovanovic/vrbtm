@@ -5,7 +5,7 @@
         <%= image_tag avatar_image(@user), class: "daxxxl bss bwam bc-16" %>
       </div>
       <div class="mts fsl fwl c-16 text-center" style="text-shadow: 1px 1px #000000;">
-        <%= @user.name %>
+        <%= @user.name %> <%= "<i class='icon-verified fsxs'></i>".html_safe if @user.verified? %>
       </div>
       <div class="relative mts">
         <div class="absolute fill bg-1 fade-s zxs"></div>
