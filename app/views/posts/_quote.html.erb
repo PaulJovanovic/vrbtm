@@ -9,7 +9,7 @@
       <div class="row nmhxxs">
         <div class="col-sm-8 phxxs">
           <%= link_to post.user_name, user_path(post.posted_by_user), class: "fsxxxs fwl c-teal lhxs" %>
-          <% if post.origin_user_id.present? %>
+          <% if post.origin_user %>
             <span class="c-10 fsxxxxs">
               &nbsp;<i class="fsxxxxxs icon-requote c-teal"></i> Requoted by <%= link_to post.user.name, user_path(post.user), class: "c-8" %>
             </span>
@@ -51,15 +51,17 @@
               </span>
             <% end %>
           </td>
-          <td class="plxxs-plus">
-            <%= form_for :post, url: posts_path do |f| %>
-              <%= f.hidden_field :origin_user_id, value: post.posted_by_user.id %>
-              <%= f.hidden_field :quote_id, value: post.quote_id %>
-              <%= button_tag data: { confirm: "Are you sure you want to requote this?" }, class: "pan bg-n", title: "Requote" do %>
-                <i class="icon-requote fsxxs c-teal"></i>
+          <% if current_user.id != post.posted_by_user.id %>
+            <td class="plxxs-plus">
+              <%= form_for :post, url: posts_path do |f| %>
+                <%= f.hidden_field :origin_user_id, value: post.posted_by_user.id %>
+                <%= f.hidden_field :quote_id, value: post.quote_id %>
+                <%= button_tag data: { confirm: "Are you sure you want to requote this?" }, class: "pan bg-n", title: "Requote" do %>
+                  <i class="icon-requote fsxxs c-teal"></i>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
+            </td>
+          <% end %>
         </tr>
       </table>
     </div>
