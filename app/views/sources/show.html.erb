@@ -1,38 +1,36 @@
-<div class="bg-16 text-center">
-  <div class="container phxs pvxxl">
-    <div class="fsxxl">
-      <%= @source.name %>
-    </div>
-  </div>
-</div>
 <div class="container phxs">
   <div class="row nmhxs mtm">
     <div class="col-sm-7 phxs">
-      <% @source.quotes.order("posts_count desc").each do |quote| %>
-        <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
-          <div class="fsxs c-2 lhxs">
-            <i class="icon-leftquote c-10"></i>
-              <%= quote.text %>
-            <i class="icon-rightquote c-10"></i>
-          </div>
-          <table class="mtxs">
-            <tr>
-              <td>
-                <i class="fa fa-comment"></i> <%= quote.posts_count %>
-              </td>
-              <td class="phxxxs">
-                -
-              </td>
-              <td>
-                <%= form_for :post, url: posts_path do |f| %>
-                  <%= f.hidden_field :quote_id, value: quote.id %>
-                  <%= f.submit "Quote", class: "c-teal bg-n pan" %>
-                <% end %>
-              </td>
-            </tr>
-          </table>
+      <div class="pas bg-16 fwl bss bwhs bwts bwbm bc-2">
+        <div class="fwm pull-right">
+          <%= pluralize(@source.quotes.count, "quote") %>
         </div>
-      <% end %>
+        <%= @source.name %>
+      </div>
+      <div class="mtxxxs">
+        <% @source.quotes.order("posts_count desc").each do |quote| %>
+          <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+            <div class="fsxs c-2 lhxs">
+              <i class="icon-leftquote c-10"></i>
+                <%= quote.text %>
+              <i class="icon-rightquote c-10"></i>
+            </div>
+            <table class="mtxs">
+              <tr>
+                <td class="plxxs-plus">
+                  <%= form_for :post, url: posts_path do |f| %>
+                    <%= f.hidden_field :quote_id, value: quote.id %>
+                    <%= button_tag data: { confirm: "Are you sure you want to post this quote?" }, title: "Quote", class: "c-teal bg-n pan" do %>
+                      <i class="fa fa-comment"></i>
+                    <% end %>
+                    <%= quote.posts_count %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <% end %>
+      </div>
     </div>
     <div class="col-sm-5 phxs">
     </div>
