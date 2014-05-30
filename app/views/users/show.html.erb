@@ -12,12 +12,12 @@
         <div class="row nmhxxs pvxs zs">
           <div class="col-sm-8 col-sm-offset-2 phxxs c-12">
             <div class="phxs fws">
-              "<%= @user.favorite_quote || "Sometimes I can only throw as fast as my arm will let me." %>"
+              "<%= @user.favorite_quote.presence || "Sometimes I can only throw as fast as my arm will let me." %>"
             </div>
           </div>
           <div class="col-sm-8 col-sm-offset-2 phxxs text-right c-16">
             <div class="phxs">
-              <%= @user.favorite_quote_author || "Dennis Quade" %>
+              <%= @user.favorite_quote_author.presence || "Dennis Quade" %>
             </div>
           </div>
         </div>
