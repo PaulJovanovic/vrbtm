@@ -1,6 +1,6 @@
 <div class="container phxs pbxxl">
   <div class="row nmhxs">
-    <div class="col-sm-7 phxs">
+    <div class="col-sm-8 phxs">
       <div class="mtm phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
         <%= form_for :post, url: posts_path, method: :post, html: { id: "user-posts-create" } do |f| %>
           <%= f.hidden_field :quote_id, class: "js-post-quote-id" %>
@@ -24,15 +24,53 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-5 phxs mtm">
-      People You May Know
-      <% User.all.each do |user| %>
-        <% if !current_user.following?(user) && current_user.id != user.id %>
-          <div class="mtxxxs">
-            <%= link_to "#{user.name}", user_path(user), class: "c-teal" %>
-          </div>
-        <% end %>
-      <% end %>
+    <div class="col-sm-4 phxs mtm">
+      <div class="bss bwhs bwts bwbm bc-2">
+        <div class="paxxs bg-16">
+          Suggested People
+        </div>
+        <div class="paxxs bg-16 bss bwts bc-12">
+          <% User.all.each do |user| %>
+            <% if !current_user.following?(user) && current_user.id != user.id %>
+              <div class="mtxxxs-plus">
+                <%= link_to user_path(user) do %>
+                  <div class="row nmhxxs">
+                    <div class="col-xs-3 phxxs">
+                      <%= image_tag avatar_image(user, :small), class: "img-responsive" %>
+                    </div>
+                    <div class="col-xs-9 phxxs">
+                      <div class="fwl">
+                        <%= user.name %>
+                      </div>
+                      <div class="c-6">
+                        <table>
+                          <tr>
+                            <td class="plxxxs-plus">
+                              <i class="fa fa-user"></i>
+                            </td>
+                            <td class="plxxxs-plus">
+                              <%= number_to_shorthand(user.followers.count) %>
+                            </td>
+                            <td class="plxxxs-plus">
+                              -
+                            </td>
+                            <td class="plxxxs-plus">
+                              <i class="icon-rightquote fsxxxs"></i>
+                            </td>
+                            <td class="plxxxs-plus">
+                              <%= number_to_shorthand(user.posts.count) %>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
