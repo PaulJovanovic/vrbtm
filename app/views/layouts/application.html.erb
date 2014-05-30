@@ -20,7 +20,7 @@
         <div class="pvxs dvm">
           <div class="pull-right">
             <%= link_to user_path(current_user), class: "c-16" do %>
-              <%= image_tag "avatar.jpg", class: "daxs" %>
+              <%= image_tag avatar_image(current_user, :small), class: "daxs" %>
               <%= current_user.name %>
             <% end %>
             &nbsp;
