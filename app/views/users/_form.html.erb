@@ -47,7 +47,7 @@
   </div>
   <div class="row nmhxxs mtm">
     <div class="col-sm-6 col-sm-offset-6 phxxs">
-      <%= f.submit "Save Changes", class: "btn btn-primary full-width" %>
+      <%= button_tag "Save Changes", class: "btn btn-primary full-width", data: { disable_with: "Saving..." } %>
     </div>
   </div>
 <% end %>
