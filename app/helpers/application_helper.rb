@@ -1,6 +1,6 @@
 module ApplicationHelper
   def number_to_shorthand(number)
-    number_to_human(number, units: {thousand: "K", million: "M"}, precision: 2)
+    number_to_human(number, units: {thousand: "K", million: "M"}, significant_digits: 4)
   end
 
   def resource_name
