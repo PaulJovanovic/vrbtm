@@ -8,10 +8,12 @@ class Like < ActiveRecord::Base
   private
 
   def increment_like_count
-    likable_type.constantize.increment_counter(:likes_count, likable_id)
+    likable.increment(:likes_count)
+    likable.save
   end
 
   def decrement_like_count
-    likable_type.constantize.decrement_counter(:likes_count, likable_id)
+    likable.decrement(:likes_count)
+    likable.save
   end
 end
