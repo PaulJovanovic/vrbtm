@@ -47,6 +47,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    dalli (2.7.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -79,6 +80,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (1.25.1)
@@ -200,12 +202,14 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
+  dalli
   devise
   factory_girl_rails
   font-awesome-rails
   friendly_id
   jbuilder (~> 1.2)
   jquery-rails
+  memcachier
   mocha
   mysql2
   newrelic_rpm

@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :origin_user, class_name: "User"
   belongs_to :quote, counter_cache: true
-  has_many :likes, as: :likable
+  has_many :likes, as: :likable, dependent: :destroy
   accepts_nested_attributes_for :quote
 
   validates :user, :quote, presence: true
