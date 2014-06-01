@@ -17,7 +17,7 @@
                 <td class="plxxxs">
                   <%= "<i class='icon-verified fsxxxs'></i>".html_safe if post.posted_by_user.verified %>
                 </td>
-                <% if post.origin_user %>
+                <% if post.original_post %>
                   <td class="plxxs c-10 fsxxxxs">
                     <i class="fsxxxxxs icon-requote c-teal"></i> Requoted by <%= link_to post.user.name, user_path(post.user), class: "c-8" %>
                   </td>
@@ -50,21 +50,21 @@
         <table>
           <tr>
             <td class="plxxs-plus">
-              <%= form_for :like, url: likes_path, method: post.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like" } do |f| %>
+              <%= form_for :like, url: likes_path, method: post.original.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like js-like js-like-Post-#{post.original.id}" }, data: { likable_type: "Post", likable_id: post.original.id } do |f| %>
                 <%= f.hidden_field :likable_type, value: "Post" %>
-                <%= f.hidden_field :likable_id, value: post.id %>
-                <%= link_to "#", class: "js-like-submit#{ " active" if post.liked_by?(current_user) }", title: "Favorite" do %>
+                <%= f.hidden_field :likable_id, value: post.original.id %>
+                <%= link_to "#", class: "js-like-submit js-like-submit-Post-#{post.original.id}#{ " active" if post.original.liked_by?(current_user) }", title: "Favorite" do %>
                   <i class="fa fa-star c-10 c-teal-active"></i>
                 <% end %>
-                <span class="js-like-count<%= " hide" if post.likes_count == 0 %>">
-                  <%= post.likes_count %>
+                <span class="js-like-count-Post-<%= post.original.id %><%= " hide" if post.original.likes_count == 0 %>">
+                  <%= post.original.likes_count %>
                 </span>
               <% end %>
             </td>
             <% if current_user.id != post.posted_by_user.id %>
               <td class="plxxs-plus">
                 <%= form_for :post, url: posts_path do |f| %>
-                  <%= f.hidden_field :origin_user_id, value: post.posted_by_user.id %>
+                  <%= f.hidden_field :original_post_id, value: post.original.id %>
                   <%= f.hidden_field :quote_id, value: post.quote_id %>
                   <%= button_tag data: { confirm: "Are you sure you want to requote this?" }, class: "pan bg-n", title: "Requote" do %>
                     <i class="icon-requote fsxxs c-teal"></i>

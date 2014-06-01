@@ -3,7 +3,10 @@ class Like
     if @form.find("input[name=_method]").length == 0
       @form.append("<input type='hidden' name='_method' value='post'/>")
     @method = @form.find("input[name=_method]")
-    @count = @form.find(".js-like-count")
+    @likable_type = @form.data("likable-type")
+    @likable_id = @form.data("likable-id")
+    @submit = $(".js-like-submit-#{@likable_type}-#{@likable_id}")
+    @count = $(".js-like-count-#{@likable_type}-#{@likable_id}")
 
     @form.find(".js-like-submit").click (e)=>
       e.preventDefault()
@@ -41,15 +44,15 @@ class Like
 
   toggleMethod: ->
     if @methodIsPost()
-      @method.val("delete")
+      $(".js-like-#{@likable_type}-#{@likable_id}").find("input[name=_method]").val("delete")
     else
-      @method.val("post")
+      $(".js-like-#{@likable_type}-#{@likable_id}").find("input[name=_method]").val("post")
 
   toggleActive: ->
     if @methodIsPost()
-      @form.find(".js-like-submit").addClass("active");
+      @submit.addClass("active");
     else
-      @form.find(".js-like-submit").removeClass("active");
+      @submit.removeClass("active");
 
 $(document).ready ->
   $(".js-like").each ->

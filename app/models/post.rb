@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
-  belongs_to :origin_user, class_name: "User"
+  belongs_to :original_post, class_name: "Post", touch: true
   belongs_to :quote, counter_cache: true
   has_many :likes, as: :likable, dependent: :destroy
   accepts_nested_attributes_for :quote
@@ -14,16 +14,20 @@ class Post < ActiveRecord::Base
           user_id: user.id)
   end
 
-  def user_name
-    if origin_user
-      origin_user.name
-    else
-      user.name
-    end
+  def original
+    original_post || self
   end
 
   def posted_by_user
-    origin_user || user
+    if original_post
+      original_post.user
+    else
+      user
+    end
+  end
+
+  def user_name
+    posted_by_user.name
   end
 
   def liked_by?(user)
