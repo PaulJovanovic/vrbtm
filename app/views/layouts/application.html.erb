@@ -17,7 +17,7 @@
   <% if signed_in? %>
     <div class="bg-2">
       <div class="container phxs">
-        <div class="pvxs dvm">
+        <div class="dvm lhm">
           <div class="pull-right">
             <%= link_to user_path(current_user), class: "c-16" do %>
               <%= image_tag avatar_image(current_user, :small), class: "daxs" %>
@@ -26,10 +26,18 @@
             &nbsp;
             <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
           </div>
-          <div class="pull-left">
-            <%= link_to root_path do %>
-              <i class="icon-vrbtm fsl c-16"></i>
-            <% end %>
+          <div>
+            <div class="pull-left">
+              <%= link_to root_path do %>
+                <i class="icon-vrbtm fsl c-16" style="vertical-align: middle"></i>
+              <% end %>
+            </div>
+            <div class="relative mlxl c-10 fsxxxs pull-left hidden-xs">
+              <%= text_field_tag 'user_search', nil, placeholder: "Search people", class: "phxs mtxs bg-6 dvxs lhxs bras js-people-search" %>
+              <div class="absolute right top mrxxxs">
+                <i class="fa fa-search"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>

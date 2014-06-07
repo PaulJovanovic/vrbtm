@@ -46,6 +46,40 @@ $(document).ready(function() {
 
   $("abbr.js-timeago").timeago();
 
+  var people = new Bloodhound({
+    datumTokenizer: function (d) {
+      return Bloodhound.tokenizers.whitespace(d.value);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/peoples/search?name=%QUERY',
+      filter: function (people) {
+        return $.map(people, function (person) {
+          return {
+            id: person.id,
+            name: person.name,
+            url: person.url,
+            tokens: person.name.split(" ")
+          };
+        });
+      }
+    }
+  });
+
+  people.initialize();
+
+  $('.js-people-search').typeahead(null, {
+    name: 'people',
+    source: people.ttAdapter(),
+    templates: {
+      suggestion: Handlebars.compile([
+        '<p>{{name}}</p>'
+      ].join(''))
+    }
+  }).on('typeahead:selected', function(event, selection) {
+    window.location = selection.url;
+  });
+
   var users = new Bloodhound({
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.value);
