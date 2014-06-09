@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vrbtm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= link_to "#" do %>
+    <div class="pvxxxs c-16 bg-teal text-center">
+      This website is currently in beta.  We encourage all to try out vrbtm and provide feedback.
+    </div>
+  <% end %>
+  <%= yield %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+</body>
+</html>

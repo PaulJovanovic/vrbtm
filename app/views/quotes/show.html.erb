@@ -1,0 +1,37 @@
+<div class="container phxs pbxxl">
+  <div class="row nmhxs">
+    <div class="col-sm-8 phxs mtm">
+      <div class="mtxxxs-plus phs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+        <div class="fsxs c-2 lhxs">
+          <i class="icon-leftquote c-10"></i>
+            <%= @quote.text %>
+          <i class="icon-rightquote c-10"></i>
+        </div>
+        <div class="row nmhxxs mtxxxs fss fwl">
+          <div class="col-xs-6 phxxs">
+            <% if current_user %>
+              <table>
+                <tr>
+                  <td class="plxxs-plus">
+                    <%= form_for :post, url: posts_path do |f| %>
+                      <%= f.hidden_field :quote_id, value: @quote.id %>
+                      <%= button_tag data: { confirm: "Are you sure you want to post this quote?" }, title: "Quote", class: "c-teal bg-n pan" do %>
+                        <i class="fa fa-comment"></i>
+                      <% end %>
+                      <%= @quote.posts_count %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            <% end %>
+          </div>
+          <div class="col-xs-6 phxxs text-right">
+            <%= link_to send("#{@quote.citable_type.underscore}_path", @quote.citable.slug), class: "c-teal" do %>
+              <span class="js-post-name"><%= @quote.name %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

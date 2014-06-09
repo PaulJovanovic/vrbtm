@@ -1,4 +1,4 @@
-<div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
+<div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2 js-post">
   <% cache("posts/#{post.id}/#{post.updated_at}") do %>
     <div class="row nmhxxxs">
       <div class="col-xs-2 col-md-1 phxxxs">
@@ -40,7 +40,7 @@
         </div>
         <div class="mtxxxs fsxs c-2 lhxs">
           <i class="icon-leftquote c-10"></i>
-            <%= post.quote.text %>
+            <span class="js-post-text"><%= post.quote.text %></span>
           <i class="icon-rightquote c-10"></i>
         </div>
       </div>
@@ -48,36 +48,43 @@
   <% end %>
   <div class="row nmhxxs mtxxxs fss fwl">
     <div class="col-xs-6 phxxs">
-      <table>
-        <tr>
-          <td class="plxxs-plus">
-            <%= form_for :like, url: likes_path, method: post.original.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like js-like js-like-Post-#{post.original.id}" }, data: { likable_type: "Post", likable_id: post.original.id } do |f| %>
-              <%= f.hidden_field :likable_type, value: "Post" %>
-              <%= f.hidden_field :likable_id, value: post.original.id %>
-              <%= link_to "#", class: "js-like-submit js-like-submit-Post-#{post.original.id}#{ " active" if post.original.liked_by?(current_user) }", title: "Favorite" do %>
-                <i class="fa fa-star c-10 c-teal-active"></i>
-              <% end %>
-              <span class="js-like-count-Post-<%= post.original.id %><%= " hide" if post.original.likes_count == 0 %>">
-                <%= post.original.likes_count %>
-              </span>
-            <% end %>
-          </td>
-          <% if current_user.id != post.posted_by_user.id %>
+      <% if current_user %>
+        <table>
+          <tr>
             <td class="plxxs-plus">
-              <%= form_for :post, url: posts_path do |f| %>
-                <%= f.hidden_field :original_post_id, value: post.original.id %>
-                <%= f.hidden_field :quote_id, value: post.quote_id %>
-                <%= button_tag data: { confirm: "Are you sure you want to requote this?" }, class: "pan bg-n", title: "Requote" do %>
-                  <i class="icon-requote fsxxs c-teal"></i>
+              <%= form_for :like, url: likes_path, method: post.original.liked_by?(current_user) ? :delete : :post, remote: true, html: { class: "fsxs js-like js-like-Post-#{post.original.id}" }, data: { likable_type: "Post", likable_id: post.original.id } do |f| %>
+                <%= f.hidden_field :likable_type, value: "Post" %>
+                <%= f.hidden_field :likable_id, value: post.original.id %>
+                <%= link_to "#", class: "js-like-submit js-like-submit-Post-#{post.original.id}#{ " active" if post.original.liked_by?(current_user) }", title: "Favorite" do %>
+                  <i class="fa fa-star c-10 c-teal-active"></i>
                 <% end %>
+                <span class="js-like-count-Post-<%= post.original.id %><%= " hide" if post.original.likes_count == 0 %>">
+                  <%= post.original.likes_count %>
+                </span>
               <% end %>
             </td>
-          <% end %>
-        </tr>
-      </table>
+            <% if current_user.id != post.posted_by_user.id %>
+              <td class="plxxs-plus">
+                <%= form_for :post, url: posts_path do |f| %>
+                  <%= f.hidden_field :original_post_id, value: post.original.id %>
+                  <%= f.hidden_field :quote_id, value: post.quote_id %>
+                  <%= button_tag data: { confirm: "Are you sure you want to requote this?" }, class: "pan bg-n", title: "Requote" do %>
+                    <i class="icon-requote fsxxs c-teal"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            <% end %>
+            <td class="plxxs-plus">
+              <i class="fa fa-share fsxs c-teal pointer js-facebook-share" data-link="<%= post_url(post) %>" title="Share"></i>
+            </td>
+          </tr>
+        </table>
+      <% end %>
     </div>
     <div class="col-xs-6 phxxs text-right">
-      <%= link_to post.quote.name, send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" %>
+      <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" do %>
+        <span class="js-post-name"><%= post.quote.name %></span>
+      <% end %>
     </div>
   </div>
 </div>

@@ -42,6 +42,25 @@
         </div>
       </div>
     </div>
+  <% else %>
+    <div class="bg-2">
+      <div class="container phxs">
+        <div class="dvm lhm">
+          <div class="pull-right c-16">
+            <%= link_to "sign in", new_session_path(resource_name) %>
+            -
+            <%= link_to "sign up", new_user_registration_path %>
+          </div>
+          <div>
+            <div class="pull-left">
+              <%= link_to root_path do %>
+                <i class="icon-vrbtm fsl c-16" style="vertical-align: middle"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
   <%= yield %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>

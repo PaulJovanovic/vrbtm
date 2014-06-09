@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
+
   def create
     @post = Post.new(post_params)
 
@@ -7,6 +9,10 @@ class PostsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
 private

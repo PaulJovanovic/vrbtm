@@ -5,17 +5,19 @@
   <div class="mtxs">
     <%= f.password_field :password, placeholder: "Password", class: "phxxxs pvxxxs fsxxxs full-width", autocomplete: "off" %>
   </div>
-  <div class="row nmhxs">
-    <div class="col-sm-6 phxs mtxs">
-      <div class="fsxxxxs c-16">
-        <%= f.check_box :remember_me %> Remember Me
-      </div>
-      <div class="mtxxxxs fsxxxxs c-16">
-        <%= link_to "Forgot password?", "#", class: "c-teal" %>
-      </div>
-    </div>
-    <div class="col-sm-6 phxs mtxs">
-      <%= f.submit "log in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
-    </div>
+  <div class="mtxs fsxxxxs c-16">
+    <table>
+      <tr>
+        <td class="plxxxs-plus">
+          <%= f.check_box :remember_me %> Remember Me
+        </td>
+        <td class="plxxxs-plus">
+          <%= link_to "Forgot password?", new_user_password_path, class: "c-teal" %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="mtxs">
+    <%= f.submit "log in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
   </div>
 <% end %>

@@ -1,4 +1,6 @@
 class QuotesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
+
   def create
     quote = Quote.new(quote_params)
 
@@ -7,6 +9,10 @@ class QuotesController < ApplicationController
     else
       render json: { errors: quote.errors }, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @quote = Quote.find(params[:id])
   end
 
 private
