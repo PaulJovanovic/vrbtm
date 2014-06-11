@@ -91,8 +91,8 @@
   </div>
   <div class="row nmhxs mtxxxs ptxs bss bwts bc-14 hide js-post-more">
     <div class="col-xs-10 phxs">
-      <% if post.tags.any? %>
-        <% post.tags.each do |tag| %>
+      <% if post.original.tags.any? %>
+        <% post.original.tags.each do |tag| %>
           <%= link_to tag_path(tag), class: "mlxxxs-plus show pull-left" do %>
             <div class="phxxxs pvxxxxs bg-2 c-16 fsxxxs fwl pull-left js-post-tag"><%= tag.name %></div>
           <% end %>
