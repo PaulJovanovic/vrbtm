@@ -3,8 +3,7 @@
     <div class="col-sm-8 phxs">
       <% @tags.each do |tag| %>
         <%= link_to tag_path(tag) do %>
-          <% random_number = rand(1000) %>
-          <div class="mlxxxs mtxxxs paxxxs bg-2 c-16 fwl pointer pull-left js-gradient" data-number="<%= random_number %>">
+          <div class="mlxxxs mtxxxs paxxxs bg-2 c-16 fwl pointer pull-left js-gradient" data-number="<%= tag.quotes.count %>">
             <%= tag.name %>
           </div>
         <% end %>
