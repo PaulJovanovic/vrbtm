@@ -93,7 +93,9 @@
     <div class="col-xs-10 phxs">
       <% if post.tags.any? %>
         <% post.tags.each do |tag| %>
-          <div class="mlxxxs-plus phxxxs pvxxxxs bg-2 c-16 fsxxxs fwl pull-left js-post-tag"><%= tag.name %></div>
+          <%= link_to tag_path(tag), class: "mlxxxs-plus show pull-left" do %>
+            <div class="phxxxs pvxxxxs bg-2 c-16 fsxxxs fwl pull-left js-post-tag"><%= tag.name %></div>
+          <% end %>
         <% end %>
       <% else %>
         <div class="phxxxs pvxxxxs bg-10 c-16 fsxxxs fwl pull-left">no tags</div>

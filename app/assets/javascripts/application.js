@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery_ujs
+//= require jquery.ui.effect
 //= require handlebars
 //= require jquery.timeago
 //= require jquery.typeahead
@@ -45,6 +46,44 @@ $(document).ready(function() {
   };
 
   $("abbr.js-timeago").timeago();
+
+  function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+
+  function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+
+  function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  var gradient_numbers = [];
+    $(".js-gradient").each(function() {
+      gradient_numbers.push(parseInt($(this).data("number")));
+    });
+    gradient_numbers.sort();
+    var min_number = gradient_numbers[0];
+    var max_number = gradient_numbers[gradient_numbers.length - 1];
+
+  setTimeout(function(){
+    $(".js-gradient").each(function(){
+      var number = parseFloat($(this).data("number"));
+      var percent = (number - min_number) * 1.0 / (max_number - min_number);
+      var min_rgb = hexToRgb("#27292A");
+      var max_rgb = hexToRgb("#45BECE");
+      console.log(number);
+      console.log(rgbToHex(min_rgb.r + Math.floor(percent * (max_rgb.r - min_rgb.r)), min_rgb.g + Math.floor(percent * (max_rgb.g - min_rgb.g)), min_rgb.b + Math.floor(percent * (max_rgb.b - min_rgb.b))));
+      $(this).animate({backgroundColor: rgbToHex(min_rgb.r + Math.floor(percent * (max_rgb.r - min_rgb.r)), min_rgb.g + Math.floor(percent * (max_rgb.g - min_rgb.g)), min_rgb.b + Math.floor(percent * (max_rgb.b - min_rgb.b)))}, 1400 * percent);
+    });
+  }, 400);
 
   $(".js-post-tag").click(function() {
     $(this).toggleClass("active");

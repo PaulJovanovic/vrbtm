@@ -1,4 +1,5 @@
 Vrbtm::Application.routes.draw do
+  resources :tags
   get "peoples/search", to: "peoples#search"
   resources :posts
   delete "likes", to: "likes#destroy"

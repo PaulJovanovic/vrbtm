@@ -19,6 +19,7 @@
       <div class="container phxs">
         <div class="dvm lhm">
           <div class="pull-right">
+            <%= link_to "tags", tags_path, class: "c-16" %>
             <%= link_to user_path(current_user), class: "c-16" do %>
               <%= image_tag avatar_image(current_user, :small), class: "daxs" %>
               <%= current_user.name %>
