@@ -46,6 +46,26 @@ $(document).ready(function() {
 
   $("abbr.js-timeago").timeago();
 
+  $(".js-post-tag").click(function() {
+    $(this).toggleClass("active");
+    $("#post_tag_ids_" + $(this).data("id")).click();
+  });
+
+  $(".js-post-tags-toggle").click(function() {
+    var $icon = $(this).find(".js-post-tags-toggle-icon");
+    if($icon.hasClass("fa-plus")) {
+      $(".js-post-tags").removeClass("hide");
+      $icon.addClass("fa-minus").removeClass("fa-plus");
+    } else {
+      $(".js-post-tags").addClass("hide");
+      $icon.addClass("fa-plus").removeClass("fa-minus");
+    }
+  });
+
+  $(".js-post-more-toggle").click(function() {
+    $(this).closest(".js-post").find(".js-post-more").toggleClass("hide");
+  });
+
   var people = new Bloodhound({
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.value);
@@ -181,11 +201,19 @@ $(document).ready(function() {
 
   $(".js-facebook-share").click(function() {
     var $post = $(this).closest(".js-post");
-    var message = $post.find(".js-post-text").html();
-    var name = $post.find(".js-post-name").html();
+    var message = $post.find(".js-post-text").text();
+    var name = $post.find(".js-post-name").text();
     var link = $(this).data("link");
+    var $tags = $post.find(".js-post-tag");
+    var facebookMessage = '"' + message + '" -' + name;
+    if ($tags.length > 0) {
+      facebookMessage += "\n";
+      $tags.each(function() {
+        facebookMessage += "#" + $(this).text() + " ";
+      });
+    }
     FB.login(function(){
-     FB.api('/me/feed', 'post', {message: '"' + message + '" -' + name, actions: { name: name, link: link }});
+     FB.api('/me/feed', 'post', {message: facebookMessage, actions: { name: name, link: link }});
     }, {scope: 'publish_actions'});
   })
 });

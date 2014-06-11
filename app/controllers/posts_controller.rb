@@ -2,9 +2,9 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def create
-    @post = Post.new(post_params)
+    post = Post.new(post_params)
 
-    if @post.save
+    if post.save
       redirect_to root_path
     else
       redirect_to root_path
@@ -17,6 +17,6 @@ class PostsController < ApplicationController
 
 private
   def post_params
-    params.require(:post).permit(:quote_id, :original_post_id).merge({user_id: current_user.id})
+    params.require(:post).permit(:quote_id, :original_post_id, { tag_ids: [] }).merge({user_id: current_user.id})
   end
 end

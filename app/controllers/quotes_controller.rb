@@ -17,6 +17,6 @@ class QuotesController < ApplicationController
 
 private
   def quote_params
-    params.require(:quote).permit(:text, :citable_type, :citable_id)
+    params.require(:quote).permit(:text, :citable_type, :citable_id, :tags)
   end
 end

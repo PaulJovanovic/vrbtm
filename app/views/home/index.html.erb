@@ -4,14 +4,35 @@
       <div class="mtm phxs pvxs bg-16 bss bwhs bwts bwbm bc-2">
         <%= form_for :post, url: posts_path, method: :post, html: { id: "user-posts-create" } do |f| %>
           <%= f.hidden_field :quote_id, class: "js-post-quote-id" %>
+          <% Tag.order(:name).each do |tag| %>
+            <%= f.check_box :tag_ids, {multiple: true, class: "hide"}, tag.id, nil %>
+          <% end %>
         <% end %>
         <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
           <%= f.hidden_field :citable_type, class: "js-quote-citable-type", value: "Source" %>
           <%= f.hidden_field :citable_id, class: "js-quote-citable-id" %>
           <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width" %>
           <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
-          <div class="mtxxs text-right">
-            <%= f.submit "post", class: "btn btn-primary pvxxxs fsxxs fwl" %>
+          <div class="row nmhxxs">
+            <div class="col-sm-10 phxxs mtxxs">
+              <span class="lhs fwl c-teal pointer js-post-tags-toggle">
+                <i class="fa fa-plus js-post-tags-toggle-icon"></i> Tags
+              </span>
+              <div class="row nmhxxxs hide js-post-tags">
+                <% Tag.order(:name).each do |tag| %>
+                  <div class="mlxxxs mtxxxs pointer pull-left js-post-tag" data-id="<%= tag.id %>" data-name="<%= tag.name %>">
+                    <div class="paxxxs bg-10 bg-2-active c-16 fwl">
+                      <%= tag.name %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-sm-2 phxxs mtxxs">
+              <div class="text-right">
+                <%= f.submit "post", class: "btn btn-primary pvxxxs fsxxs fwl full-width" %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601011447) do
+ActiveRecord::Schema.define(version: 20140610052004) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -62,6 +62,11 @@ ActiveRecord::Schema.define(version: 20140601011447) do
     t.integer  "original_post_id"
   end
 
+  create_table "posts_tags", force: true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
   create_table "quotes", force: true do |t|
     t.string   "citable_type"
     t.integer  "citable_id"
@@ -69,6 +74,11 @@ ActiveRecord::Schema.define(version: 20140601011447) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "posts_count",  default: 0
+  end
+
+  create_table "quotes_tags", force: true do |t|
+    t.integer "quote_id"
+    t.integer "tag_id"
   end
 
   create_table "relationships", force: true do |t|
@@ -87,6 +97,10 @@ ActiveRecord::Schema.define(version: 20140601011447) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string "name"
   end
 
   create_table "users", force: true do |t|

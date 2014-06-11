@@ -1,11 +1,13 @@
 class Post < ActiveRecord::Base
+  has_many :likes, as: :likable, dependent: :destroy
   belongs_to :user
   belongs_to :original_post, class_name: "Post", touch: true
   belongs_to :quote, counter_cache: true
-  has_many :likes, as: :likable, dependent: :destroy
-  accepts_nested_attributes_for :quote
+  has_and_belongs_to_many :tags
 
   validates :user, :quote, presence: true
+
+  after_create :transfer_tags_to_quote
 
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
@@ -32,5 +34,10 @@ class Post < ActiveRecord::Base
 
   def liked_by?(user)
     likes.where(user: user).count == 1
+  end
+
+  def transfer_tags_to_quote
+    quote.tags << tags
+    quote.save
   end
 end
