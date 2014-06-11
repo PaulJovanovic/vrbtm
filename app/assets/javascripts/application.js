@@ -63,6 +63,7 @@ $(document).ready(function() {
   });
 
   $(".js-post-more-toggle").click(function() {
+    $(this).toggleClass("active");
     $(this).closest(".js-post").find(".js-post-more").toggleClass("hide");
   });
 
