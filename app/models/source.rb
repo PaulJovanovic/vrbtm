@@ -17,7 +17,7 @@ class Source < ActiveRecord::Base
   end
 
   def search_image
-    "/assets/source_icon.png"
+    "https://s3.amazonaws.com/vrbtm2/assets/source_icon.png"
   end
 
   def search_info
