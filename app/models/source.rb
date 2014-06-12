@@ -15,4 +15,13 @@ class Source < ActiveRecord::Base
   def self.exact_search_by_name(name)
     where('lower(name) LIKE ?', "#{name.downcase}")
   end
+
+  def search_image
+    "/assets/source_icon.png"
+  end
+
+  def search_info
+    count = quotes.count
+    "#{count} #{"quote".pluralize(count)}"
+  end
 end

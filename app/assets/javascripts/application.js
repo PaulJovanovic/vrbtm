@@ -119,6 +119,7 @@ $(document).ready(function() {
             id: person.id,
             name: person.name,
             url: person.url,
+            image: person.image,
             tokens: person.name.split(" ")
           };
         });
@@ -131,9 +132,15 @@ $(document).ready(function() {
   $('.js-people-search').typeahead(null, {
     name: 'people',
     source: people.ttAdapter(),
+    minLength: 2,
     templates: {
       suggestion: Handlebars.compile([
-        '<p>{{name}}</p>'
+        '<table class="full-width">',
+        '<tr>',
+        '<td class="dhs"><img src="{{image}}" class="das"/></td>',
+        '<td class="plxs c-teal fwl">{{name}}</td>',
+        '</tr>',
+        '</table>'
       ].join(''))
     }
   }).on('typeahead:selected', function(event, selection) {
@@ -152,7 +159,9 @@ $(document).ready(function() {
           return {
             id: user.id,
             name: user.name,
-            tokens: user.name.split(" ")
+            tokens: user.name.split(" "),
+            image: user.image,
+            info: user.info
           };
         });
       }
@@ -180,9 +189,16 @@ $(document).ready(function() {
   $('.js-quote-source-name').typeahead(null, {
     name: 'users',
     source: users.ttAdapter(),
+    minLength: 2,
     templates: {
       suggestion: Handlebars.compile([
-        '<p>{{name}}</p>'
+        '<table class="full-width">',
+        '<tr>',
+        '<td class="dhs"><img src="{{image}}" class="das"/></td>',
+        '<td class="plxs c-teal fwl">{{name}}</td>',
+        '<td class="c-2 fsxxxs text-right">{{info}}</td>',
+        '</tr>',
+        '</table>'
       ].join(''))
     }
   }).on('typeahead:selected', function(event, selection) {

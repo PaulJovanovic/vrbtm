@@ -152,4 +152,26 @@ body {
       }
     }
   }
+
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: solid 1px #27292A;
+    border-top: none;
+    padding: 10px;
+    width: 100%;
+
+    .tt-suggestions {
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .tt-suggestion + .tt-suggestion {
+      margin-top: 10px;
+    }
+  }
 }

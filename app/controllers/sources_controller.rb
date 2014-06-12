@@ -21,7 +21,7 @@ class SourcesController < ApplicationController
       sources = Source.search_by_name(name)
     end
 
-    render json: sources.map { |source| { id: source.id, name: source.name } }
+    render json: sources.map { |source| { id: source.id, name: source.name, image: source.search_image, info: "#{source.search_info}" } }
   end
 
 private

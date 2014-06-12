@@ -33,6 +33,15 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def search_image
+    avatar.url(:small)
+  end
+
+  def search_info
+    count = followers.count
+    "#{count} #{"follower".pluralize(count)}"
+  end
+
   def feed
     Post.from_users_followed_by(self)
   end
