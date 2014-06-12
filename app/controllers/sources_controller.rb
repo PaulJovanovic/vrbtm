@@ -1,7 +1,7 @@
 class SourcesController < ApplicationController
 
   def create
-    @source = Source.exact_search_by_name(source_params[:name]).last || Source.create(source_params)
+    @source = Source.exact_search_by_name(source_params[:name].strip).last || Source.create(source_params)
     if @source.persisted?
       render json: { id: @source.id, name: @source.name }
     else
