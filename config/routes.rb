@@ -12,5 +12,7 @@ Vrbtm::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   get "sign_in", to: "devise/sessions#new"
+  get 'auth/:provider/callback', to: 'authentications#create'
+  get 'auth/failure', to: redirect('/')
   root to: "home#index"
 end

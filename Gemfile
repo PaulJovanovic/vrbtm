@@ -21,9 +21,11 @@ gem "paperclip"
 gem 'aws-sdk'
 gem 'memcachier'
 gem 'dalli'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'mysql2'
+  gem 'foreman'
 end
 
 group :development, :test do

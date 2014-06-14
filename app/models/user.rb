@@ -15,6 +15,25 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :avatar, :cover_photo
 
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      names = auth.info.name.split
+      user.first_name = names[0]
+      if names.length > 1
+        user.last_name = names[names.length - 1]
+      end
+      user.email = auth.info.email
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.avatar = URI.parse("https://graph.facebook.com/#{user.uid}/picture?width=256&height=256")
+      user.avatar.attachment_file_name == "avatar.jpg"
+      user.avatar.attachment_content_type == "image/jpeg"
+      user.save!
+    end
+  end
+
   def self.search_by_name(name)
     names = name.strip.downcase.split(" ")
     if names.length == 1
