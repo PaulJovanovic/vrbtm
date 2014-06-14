@@ -10,9 +10,7 @@ Vrbtm::Application.routes.draw do
   get "users/search", to: "users#search"
   resources :users
   resources :relationships, only: [:create, :destroy]
-  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+  devise_for :users, path: '', path_names: {sign_in: 'login', sign_out: 'logout'}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get "sign_in", to: "devise/sessions#new"
-  get 'auth/:provider/callback', to: 'authentications#create'
-  get 'auth/failure', to: redirect('/')
   root to: "home#index"
 end
