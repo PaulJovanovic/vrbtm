@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
       user.avatar.attachment_content_type = "image/jpeg"
       user.save!
       user.avatar.attachment.reprocess!
-      user.posts.update_all({:field1 => true, :field2 => true})
+      user.posts.update_all({:updated_at => Time.now})
     end
   end
 
