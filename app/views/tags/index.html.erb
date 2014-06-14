@@ -1,13 +1,15 @@
 <div class="container phxs">
   <div class="row nmhxs mtm">
     <div class="col-sm-8 phxs">
-      <% @tags.each do |tag| %>
-        <%= link_to tag_path(tag) do %>
-          <div class="mlxxxs mtxxxs paxxxs bg-2 c-16 fwl pointer pull-left js-gradient" data-number="<%= tag.quotes.count %>">
-            <%= tag.name %>
-          </div>
+      <div class="row mhn paxs bg-16 bss bwhs bwts bwbm bc-2">
+        <% @tags.each do |tag| %>
+          <%= link_to tag_path(tag) do %>
+            <div class="mlxxxs mtxxxs paxxxs bg-2 c-16 fwl pointer pull-left js-gradient" data-number="<%= tag.quotes.count %>">
+              <%= tag.name %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
     <div class="col-sm-4 phxs">
     </div>
