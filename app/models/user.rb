@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_one :avatar, :as => :assetable, :class_name => "Avatar", :dependent => :destroy
   has_one :cover_photo, :as => :assetable, :class_name => "CoverPhoto", :dependent => :destroy
 
-  after_save :break_posts_cache, if: "avatar.attachment_updated_at_changed?"
+  after_save :break_posts_cache, if: "avatar && avatar.attachment_updated_at_changed?"
 
   accepts_nested_attributes_for :avatar, :cover_photo
 
