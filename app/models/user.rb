@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
       user.first_name = names[0]
       if names.length > 1
         user.last_name = names[names.length - 1]
+      else
+        user.last_name = ""
       end
       user.email = auth.info.email
       user.oauth_token = auth.credentials.token
