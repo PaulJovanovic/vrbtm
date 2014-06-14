@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_one :avatar, :as => :assetable, :class_name => "Avatar", :dependent => :destroy
   has_one :cover_photo, :as => :assetable, :class_name => "CoverPhoto", :dependent => :destroy
 
+  after_save :break_posts_cache, if: "avatar.attachment_updated_at_changed?"
+
   accepts_nested_attributes_for :avatar, :cover_photo
 
   def self.from_omniauth(auth)
@@ -37,7 +39,6 @@ class User < ActiveRecord::Base
       user.avatar.attachment_content_type = "image/jpeg"
       user.save!
       user.avatar.attachment.reprocess!
-      user.posts.update_all({:updated_at => Time.now})
     end
   end
 
@@ -49,6 +50,10 @@ class User < ActiveRecord::Base
     else
       where('lower(first_name) LIKE ? AND lower(last_name) LIKE ?', "#{names[0]}%", "#{names[1..names.length].join(" ")}%")
     end
+  end
+
+  def break_posts_cache
+    posts.update_all({:updated_at => Time.now})
   end
 
   def slug
@@ -83,4 +88,5 @@ class User < ActiveRecord::Base
   def following?(user)
     relationships.where(followed_id: user.id).count == 1
   end
+
 end
