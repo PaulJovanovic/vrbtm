@@ -17,8 +17,25 @@
   <% if signed_in? %>
     <div class="bg-2">
       <div class="container phxs">
-        <div class="dvm lhm">
-          <div class="pull-right">
+        <div class="row nmhxxs dvm lhm">
+          <div class="col-xs-8 phxxs">
+            <div class="row nmhxxs">
+              <div class="col-xs-2 phxxs">
+                <%= link_to root_path do %>
+                  <i class="icon-vrbtm fsl c-16" style="vertical-align: middle"></i>
+                <% end %>
+              </div>
+              <div class="col-xs-10 phxxs">
+                <div class="relative mlxl c-10 fsxxxs pull-left hidden-xs">
+                  <%= text_field_tag 'user_search', nil, placeholder: "Search people", class: "phxs mtxs bg-6 dhxxxxxl dvxs lhxs bras js-people-search" %>
+                  <div class="absolute right top mrxxxs">
+                    <i class="fa fa-search"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 phxxs">
             <%= link_to "tags", tags_path, class: "c-16" %>
             <%= link_to user_path(current_user), class: "c-16" do %>
               <%= image_tag avatar_image(current_user, :small), class: "daxs" %>
@@ -26,19 +43,6 @@
             <% end %>
             &nbsp;
             <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-16" %>
-          </div>
-          <div>
-            <div class="pull-left">
-              <%= link_to root_path do %>
-                <i class="icon-vrbtm fsl c-16" style="vertical-align: middle"></i>
-              <% end %>
-            </div>
-            <div class="relative mlxl c-10 fsxxxs pull-left hidden-xs">
-              <%= text_field_tag 'user_search', nil, placeholder: "Search people", class: "phxs mtxs bg-6 dhxxxxxl dvxs lhxs bras js-people-search" %>
-              <div class="absolute right top mrxxxs">
-                <i class="fa fa-search"></i>
-              </div>
-            </div>
           </div>
         </div>
       </div>

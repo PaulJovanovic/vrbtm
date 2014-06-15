@@ -27,16 +27,24 @@
           </div>
           <div class="col-sm-4 phxxs text-right hidden-xs">
             <div class="fsxxxxs fws c-8">
-              <abbr class="lhxs js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
-                <%= post.created_at.to_s %>
-              </abbr>
+              <% if post.created_at < 1.day.ago %>
+                <%= post.created_at.strftime("%b %-d") %>
+              <% else %>
+                <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+                  <%= post.created_at.to_s %>
+                </abbr>
+              <% end %>
             </div>
           </div>
         </div>
         <div class="fsxxxxs fws c-8 visible-xs">
-          <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
-            <%= post.created_at.to_s %>
-          </abbr>
+          <% if post.created_at < 1.day.ago %>
+            <%= post.created_at.strftime("%b %-d") %>
+          <% else %>
+            <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+              <%= post.created_at.to_s %>
+            </abbr>
+          <% end %>
         </div>
         <div class="mtxxxs fsxs c-2 lhxs">
           <i class="icon-leftquote c-10"></i>
