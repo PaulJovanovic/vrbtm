@@ -83,8 +83,6 @@ $(document).ready(function() {
       var percent = (number - min_number) * 1.0 / (max_number - min_number);
       var min_rgb = hexToRgb("#27292A");
       var max_rgb = hexToRgb("#45BECE");
-      console.log(number);
-      console.log(rgbToHex(min_rgb.r + Math.floor(percent * (max_rgb.r - min_rgb.r)), min_rgb.g + Math.floor(percent * (max_rgb.g - min_rgb.g)), min_rgb.b + Math.floor(percent * (max_rgb.b - min_rgb.b))));
       $(this).animate({backgroundColor: rgbToHex(min_rgb.r + Math.floor(percent * (max_rgb.r - min_rgb.r)), min_rgb.g + Math.floor(percent * (max_rgb.g - min_rgb.g)), min_rgb.b + Math.floor(percent * (max_rgb.b - min_rgb.b)))}, 1400 * percent);
     });
   }, 400);
