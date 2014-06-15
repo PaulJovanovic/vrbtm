@@ -18,15 +18,15 @@
     <div class="bg-2">
       <div class="container phxs">
         <div class="row nmhxs dvm lhm">
-          <div class="col-xs-8 phxs">
+          <div class="col-xs-2 col-sm-8 phxs">
             <div class="row nmhxs">
-              <div class="col-xs-2 phxs">
+              <div class="col-xs-12 col-sm-2 phxs">
                 <%= link_to root_path do %>
                   <i class="icon-vrbtm fsl c-16" style="vertical-align: middle"></i>
                 <% end %>
               </div>
-              <div class="col-xs-7 col-xs-1-offset phxs">
-                <div class="relative c-10 fsxxxs hidden-xs">
+              <div class="col-xs-7 col-xs-1-offset phxs hidden-xs">
+                <div class="relative c-10 fsxxxs">
                   <%= text_field_tag 'user_search', nil, placeholder: "Search people", class: "phxs mtxs bg-6 dvxs lhxs bras full-width js-people-search" %>
                   <div class="absolute right top mrxxxs">
                     <i class="fa fa-search"></i>
@@ -35,9 +35,9 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-4 phxs">
+          <div class="col-xs-10 col-sm-4 phxs">
             <div class="row nmhxs">
-              <div class="col-xs-6 phxs">
+              <div class="col-xs-9 phxs">
                 <%= link_to user_path(current_user), class: "c-16 fsxxxs" do %>
                   <div class="mrxs daxs pull-left">
                     <%= image_tag avatar_image(current_user, :small), class: "img-responsive mtxs" %>
@@ -47,7 +47,7 @@
                   </div>
                 <% end %>
               </div>
-              <div class="col-xs-6 phxxs">
+              <div class="col-xs-3 phxxs">
                 <table class="pull-right">
                   <tr>
                     <td class="plxxs-plus">
