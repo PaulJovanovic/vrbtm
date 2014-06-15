@@ -27,29 +27,19 @@
           </div>
           <div class="col-sm-4 phxxs text-right hidden-xs">
             <div class="fsxxxxs fws c-8">
-              <% if post.created_at < 1.day.ago %>
-                <%= post.created_at.strftime("%b %-d") %>
-              <% else %>
-                <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
-                  <%= post.created_at.to_s %>
-                </abbr>
-              <% end %>
+              <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+                <%= post.created_at.to_s %>
+              </abbr>
             </div>
           </div>
         </div>
         <div class="fsxxxxs fws c-8 visible-xs">
-          <% if post.created_at < 1.day.ago %>
-            <%= post.created_at.strftime("%b %-d") %>
-          <% else %>
-            <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
-              <%= post.created_at.to_s %>
-            </abbr>
-          <% end %>
+          <abbr class="js-timeago" title="<%= post.created_at.getutc.iso8601 %>">
+            <%= post.created_at.to_s %>
+          </abbr>
         </div>
         <div class="mtxxxs fsxs c-2 lhxs">
-          <i class="icon-leftquote c-10"></i>
-            <span class="js-post-text"><%= post.quote.text %></span>
-          <i class="icon-rightquote c-10"></i>
+          <i class="icon-leftquote c-10"></i><span class="js-post-text"><%= post.quote.text %></span><i class="icon-rightquote c-10"></i>
         </div>
       </div>
     </div>
