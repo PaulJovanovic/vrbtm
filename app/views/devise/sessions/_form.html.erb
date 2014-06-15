@@ -5,7 +5,10 @@
   <div class="mtxs">
     <%= f.password_field :password, placeholder: "Password", class: "phxxxs pvxxxs fsxxxs full-width", autocomplete: "off" %>
   </div>
-  <div class="mtxs fsxxxxs c-16">
+  <div class="mtxs">
+    <%= f.submit "log in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
+  </div>
+  <div class="mtxxxs fsxxxxs c-16">
     <table>
       <tr>
         <td class="plxxxs-plus">
@@ -16,8 +19,5 @@
         </td>
       </tr>
     </table>
-  </div>
-  <div class="mtxs">
-    <%= f.submit "log in", class: "btn btn-primary fsxxxs fwl pvxxxs full-width" %>
   </div>
 <% end %>
