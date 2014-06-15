@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
     if avatar
       avatar.url(:small)
     else
-      "avatar.jpg"
+      "https://s3.amazonaws.com/vrbtm2/assets/avatar.jpg"
     end
   end
 
