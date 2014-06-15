@@ -47,6 +47,10 @@ $(document).ready(function() {
 
   $("abbr.js-timeago").timeago();
 
+  $(".js-post-information-click").focus(function() {
+    $(".js-post-information").removeClass("hide");
+  });
+
   function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;

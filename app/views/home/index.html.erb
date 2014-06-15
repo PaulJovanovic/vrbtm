@@ -11,29 +11,31 @@
         <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
           <%= f.hidden_field :citable_type, class: "js-quote-citable-type", value: "Source" %>
           <%= f.hidden_field :citable_id, class: "js-quote-citable-id" %>
-          <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width" %>
-          <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
-          <div class="c-10 fsxxxs">
-            Use @Full Name to quote users.
-          </div>
-          <div class="row nmhxxxs mtxxxs hide js-post-tags">
-            <% Tag.order(:name).each do |tag| %>
-              <div class="mlxxxs mtxxxs pointer pull-left js-post-tag" data-id="<%= tag.id %>" data-name="<%= tag.name %>">
-                <div class="paxxxs bg-10 bg-2-active c-16 fwl">
-                  <%= tag.name %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="row nmhxxs">
-            <div class="col-sm-10 phxxs mtxxs">
-              <span class="lhs fwl c-teal pointer js-post-tags-toggle">
-                <i class="fa fa-plus js-post-tags-toggle-icon"></i> Tags
-              </span>
+          <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width js-post-information-click" %>
+          <div class="hide js-post-information">
+            <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
+            <div class="c-10 fsxxxs">
+              Use @Full Name to quote users.
             </div>
-            <div class="col-sm-2 phxxs mtxxs">
-              <div class="text-right">
-                <%= f.submit "post", class: "btn btn-primary pvxxxs fsxxs fwl full-width" %>
+            <div class="row nmhxxxs mtxxxs hide js-post-tags">
+              <% Tag.order(:name).each do |tag| %>
+                <div class="mlxxxs mtxxxs pointer pull-left js-post-tag" data-id="<%= tag.id %>" data-name="<%= tag.name %>">
+                  <div class="paxxxs bg-10 bg-2-active c-16 fwl">
+                    <%= tag.name %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="row nmhxxs">
+              <div class="col-sm-10 phxxs mtxxs">
+                <span class="lhs fwl c-teal pointer js-post-tags-toggle">
+                  <i class="fa fa-plus js-post-tags-toggle-icon"></i> Tags
+                </span>
+              </div>
+              <div class="col-sm-2 phxxs mtxxs">
+                <div class="text-right">
+                  <%= f.submit "post", class: "btn btn-primary pvxxxs fsxxs fwl full-width" %>
+                </div>
               </div>
             </div>
           </div>
