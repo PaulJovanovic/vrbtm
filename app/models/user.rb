@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where("(provider = ? and uid = ?) or email = ?", auth.provider, auth.uid, auth.info.email).first_or_initialize.tap do |user|
-      if user.password.present?
+      if user.password.blank?
         user.password = Devise.friendly_token[0,20]
       end
       user.provider = auth.provider
