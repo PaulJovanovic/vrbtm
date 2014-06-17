@@ -37,12 +37,14 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
-      user.avatar = Avatar.new
-      user.avatar.attachment = URI.parse("https://graph.facebook.com/#{user.uid}/picture?width=256&height=256")
-      user.avatar.attachment_file_name = "avatar.jpg"
-      user.avatar.attachment_content_type = "image/jpeg"
-      user.avatar.save
-      user.avatar.attachment.reprocess!
+      unless user.avatar
+        user.avatar = Avatar.new
+        user.avatar.attachment = URI.parse("https://graph.facebook.com/#{user.uid}/picture?width=256&height=256")
+        user.avatar.attachment_file_name = "avatar.jpg"
+        user.avatar.attachment_content_type = "image/jpeg"
+        user.avatar.save
+        user.avatar.attachment.reprocess!
+      end
       user.break_posts_cache
     end
   end
