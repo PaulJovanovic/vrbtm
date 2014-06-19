@@ -3,6 +3,9 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
+    if params[:post][:photo_attributes].present?
+      post.photo = Photo.from_attributes(JSON.parse(params[:post][:photo_attributes]))
+    end
 
     if post.save
       redirect_to root_path

@@ -22,6 +22,8 @@ gem 'aws-sdk'
 gem 'memcachier'
 gem 'dalli'
 gem 'omniauth-facebook'
+gem 'json'
+gem 'rmagick'
 
 group :development do
   gem 'mysql2'

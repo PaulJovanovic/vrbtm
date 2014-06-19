@@ -7,17 +7,42 @@
           <% Tag.order(:name).each do |tag| %>
             <%= f.check_box :tag_ids, {multiple: true, class: "hide"}, tag.id, nil %>
           <% end %>
+          <div class="hide">
+            <%= f.check_box :photo_active %>
+          </div>
+          <%= f.hidden_field :photo_attributes, class: "js-post-photo-attributes" %>
         <% end %>
         <%= form_for :quote, url: quotes_path, method: :post, remote: true, html: { id: "quotes-create" } do |f| %>
           <%= f.hidden_field :citable_type, class: "js-quote-citable-type", value: "Source" %>
           <%= f.hidden_field :citable_id, class: "js-quote-citable-id" %>
-          <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width js-post-information-click" %>
+          <%= f.text_area :text, placeholder: "Quote someone", class: "paxs bss bwas bc-10 full-width js-post-quote-text" %>
           <div class="hide js-post-information">
-            <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-quote-source-name" %>
+            <%= f.text_field :name, placeholder: "Who said it?", class: "phxs pvxxxs mtxxxs bss bwas bc-10 full-width js-post-quote-name" %>
             <div class="c-10 fsxxxs">
               Use @Full Name to quote users.
             </div>
-            <div class="row nmhxxxs mtxxxs hide js-post-tags">
+            <div id="post-image" class="row nmhxxs mtxs hide">
+              <div class="col-lg-8 phxxs">
+                <div id="post-image-box" class="relative bg-2 full-width no-overflow" style="padding-bottom: 100%">
+                  <div id="post-image-text-box" class="absolute paxs c-16 bsd bwas bc-10 move js-draggable js-resizable" style="font-size:18px;">
+                    <i id="post-image-quotation-mark-left" class="icon-leftquote"></i><span class="js-post-quote-image-text">Quote</span><i id="post-image-quotation-mark-right" class="icon-rightquote"></i>
+                    <div class="mtl text-right">
+                      <span class="js-post-quote-image-word">-</span><span class="js-post-quote-image-name">Name</span>
+                    </div>
+                  </div>
+                  <div class="absolute top right nmts nmrxxxxs">
+                    <div class="absolute top right">
+                      <input id="post-image-background-color" type="text" class="hide js-minicolors" value="#27292A"/>
+                    </div>
+                    <div class="mtxl mrxxxs">
+                      <div id="post-image-font-size-slider" class="dvxxxxl"></div>
+                      <input id="post-image-font-size" type="text" value="18" class="hide" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="post-tags" class="row nmhxxxs mtxxxs hide js-post-tags">
               <% Tag.order(:name).each do |tag| %>
                 <div class="mlxxxs mtxxxs pointer pull-left js-post-tag" data-id="<%= tag.id %>" data-name="<%= tag.name %>">
                   <div class="paxxxs bg-10 bg-2-active c-16 fwl">
@@ -28,9 +53,12 @@
             </div>
             <div class="row nmhxxs">
               <div class="col-sm-10 phxxs mtxxs">
-                <span class="lhs fwl c-teal pointer js-post-tags-toggle">
-                  <i class="fa fa-plus js-post-tags-toggle-icon"></i> Tags
-                </span>
+                <div class="pls-plus lhs pointer pull-left js-tab" data-target="#post-tags">
+                  <i class="fa fa-tag c-10 c-teal-active"></i>
+                </div>
+                <div id="post-image-toggle" class="pls-plus lhs pointer pull-left js-tab" data-target="#post-image">
+                  <i class="fa fa-camera c-10 c-teal-active"></i>
+                </div>
               </div>
               <div class="col-sm-2 phxxs mtxxs">
                 <div class="text-right">

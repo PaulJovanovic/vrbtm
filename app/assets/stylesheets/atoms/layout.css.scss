@@ -68,6 +68,10 @@
   border-radius: 50%;
 }
 
+.inline {
+  display: inline;
+}
+
 .soft-hide {
   display: none;
 }
@@ -135,6 +139,10 @@ table {
 
 .pointer {
   cursor: pointer;
+}
+
+.move {
+  cursor: move;
 }
 
 .bg-repeat-x {

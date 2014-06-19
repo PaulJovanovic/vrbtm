@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  has_one :photo, :as => :assetable, :class_name => "Photo", :dependent => :destroy
   has_many :likes, as: :likable, dependent: :destroy
   belongs_to :user
   belongs_to :original_post, class_name: "Post", touch: true

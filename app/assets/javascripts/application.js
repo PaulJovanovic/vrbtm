@@ -12,9 +12,14 @@
 //
 //= require jquery_ujs
 //= require jquery.ui.effect
+//= require jquery.ui.draggable
+//= require jquery.ui.resizable
+//= require jquery.ui.slider
+//= require jquery.ui.touch-punch.min
 //= require handlebars
 //= require jquery.timeago
 //= require jquery.typeahead
+//= require minicolors
 //= require like
 //= require_tree .
 
@@ -47,8 +52,102 @@ $(document).ready(function() {
 
   $("abbr.js-timeago").timeago();
 
-  $(".js-post-information-click").focus(function() {
+  $(".js-post-quote-text").focus(function() {
     $(".js-post-information").removeClass("hide");
+  });
+
+  var textTrackings = function(quoteText) {
+    var trackings = [];
+    var text = quoteText.replace(/\n/g, '<br/>').trim();
+    var words = text.split(" ");
+    $.each(words, function() {
+      trackings.push('<span class="js-post-quote-image-word">' + this + '</span>');
+    });
+    $(".js-post-quote-image-text").html(trackings.join(" "));
+  }
+
+  $(".js-post-quote-text").keyup(function() {
+    textTrackings($(this).val());
+  }).change(function() {
+    textTrackings($(this).val());
+  });
+
+  $("#user-posts-create").submit(function() {
+    if ($("#post-image-toggle").hasClass("active")) {
+      var conversion = 394 / $("#post-image-box").width();
+      var backgroundColor = $("#post-image-background-color").val();
+      var fontSize = $("#post-image-font-size").val();
+      var position = $("#post-image-text-box").position();
+      var left = position.left;
+      var top = position.top;
+      var words = [];
+      var quotationLeftPosition = $("#post-image-quotation-mark-left").position();
+      var quotationRightPosition = $("#post-image-quotation-mark-right").position();
+      $(".js-post-quote-image-word").each(function() {
+        words.push('{"left":' + conversion * (left + $(this).position().left) + ',"top":' + conversion * (top + $(this).position().top) + ',"text":"' + $(this).html() + '"}');
+      });
+      $(".js-post-photo-attributes").val('{"background_color":"' + backgroundColor + '","font_size":' + conversion * fontSize + ',"words":[' + words.join(",") + '],"quotation_marks":[{"left":' + conversion * (left + quotationLeftPosition.left) + ',"top":'+ conversion * (top + quotationLeftPosition.top - 2) +'},{"left":' + conversion * (left + quotationRightPosition.left) + ',"top":' + conversion * (top + quotationRightPosition.top - 2) +'}]}');
+    }
+  });
+
+  var nameTracking = function(sourceName) {
+    var trackings = [];
+    var words = sourceName.trim().split(" ");
+    $.each(words, function() {
+      trackings.push('<span class="js-post-quote-image-word">' + this + '</span>');
+    });
+    $(".js-post-quote-image-name").html(trackings.join(" "));
+  }
+
+  $("#quote_name").keyup(function() {
+    nameTracking($(this).val());
+  }).change(function() {
+    nameTracking($(this).val());
+  });
+
+  $(".js-draggable").draggable();
+  $(".js-resizable").resizable();
+
+  $.minicolors = {
+    defaults: {
+      animationSpeed: 50,
+      animationEasing: 'swing',
+      change: null,
+      changeDelay: 0,
+      control: 'hue',
+      defaultValue: '',
+      hide: null,
+      hideSpeed: 100,
+      inline: false,
+      letterCase: 'uppercase',
+      opacity: false,
+      position: 'bottom right',
+      show: null,
+      showSpeed: 100,
+      theme: 'default'
+    }
+  };
+
+  $('.js-minicolors').minicolors({
+    change: function(hex, opacity) {
+      $("#post-image-box").css({backgroundColor: hex});
+    }
+  });
+
+  $("#post-image-font-size").keyup(function() {
+    $("#post-image-text-box").css({fontSize: $(this).val() + "px"});
+  });
+
+  $("#post-image-font-size-slider").slider({
+    orientation: "vertical",
+    range: "min",
+    min: 10,
+    max: 32,
+    value: 18,
+    slide: function( event, ui ) {
+      $("#post-image-font-size").val( ui.value );
+      $("#post-image-text-box").css({fontSize: ui.value + "px"});
+    }
   });
 
   function componentToHex(c) {
@@ -87,9 +186,9 @@ $(document).ready(function() {
     });
   }, 400);
 
-  $(".js-post-tag").click(function() {
+  $(".js-tab").click(function() {
     $(this).toggleClass("active");
-    $("#post_tag_ids_" + $(this).data("id")).click();
+    $($(this).data("target")).toggleClass("hide");
   });
 
   $(".js-post-tags-toggle").click(function() {
@@ -172,14 +271,14 @@ $(document).ready(function() {
 
   users.initialize();
 
-  $(".js-quote-source-name").keydown(function(event){
+  $(".js-post-quote-name").keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();
       return false;
     }
   });
 
-  $('.js-quote-source-name').keyup(function(event) {
+  $('.js-post-quote-name').keyup(function(event) {
     $(".js-quote-citable-id").val("");
     if ($(this).val().trim().charAt(0) == '@') {
       $(".js-quote-citable-type").val("User");
@@ -188,7 +287,7 @@ $(document).ready(function() {
     }
   });
 
-  $('.js-quote-source-name').typeahead(null, {
+  $('.js-post-quote-name').typeahead(null, {
     name: 'users',
     source: users.ttAdapter(),
     minLength: 2,
@@ -205,7 +304,7 @@ $(document).ready(function() {
     }
   }).on('typeahead:selected', function(event, selection) {
     $(".js-quote-citable-id").val(selection.id);
-    $(".js-quote-source-name").val(selection.name);
+    $(".js-post-quote-name").val(selection.name);
   });
 
   $("#quotes-create").on("ajax:success", function(event, data, status, xhr) {
