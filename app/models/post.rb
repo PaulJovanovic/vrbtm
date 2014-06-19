@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  has_one :photo, :as => :assetable, :class_name => "Photo", :dependent => :destroy
   has_many :likes, as: :likable, dependent: :destroy
   has_many :comments
   belongs_to :user, counter_cache: true

@@ -165,6 +165,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     rspec-core (3.0.0.rc1)
       rspec-support (= 3.0.0.rc1)
     rspec-expectations (3.0.0.rc1)
@@ -241,6 +242,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  json
   memcachier
   mocha
   mysql2
@@ -251,6 +253,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.1.1)
   rails_12factor
+  rmagick
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)
   sdoc

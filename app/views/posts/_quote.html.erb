@@ -39,9 +39,15 @@
           </abbr>
         </div>
         <div class="mtxxxs fsxs c-2 lhxs">
-          <i class="icon-leftquote c-10"></i>
-          <span class="js-post-text"><%= post.quote.text %></span>
-          <i class="icon-rightquote c-10"></i>
+          <% if post.photo %>
+            <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug) do %>
+              <%= image_tag post.photo.url(:medium), class: "img-responsive inline" %>
+            <% end %>
+          <% else %>
+            <i class="icon-leftquote c-10"></i>
+            <span class="js-post-text"><%= post.quote.text %></span>
+            <i class="icon-rightquote c-10"></i>
+          <% end %>
         </div>
       </div>
     </div>
@@ -84,11 +90,13 @@
         </table>
       <% end %>
     </div>
-    <div class="col-xs-6 phxxs text-right">
-      <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" do %>
-        <span class="js-post-name"><%= post.quote.name %></span>
-      <% end %>
-    </div>
+    <% unless post.photo %>
+      <div class="col-xs-6 phxxs text-right">
+        <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" do %>
+          <span class="js-post-name"><%= post.quote.name %></span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="mtxxxs ptxs bss bwts bc-14 hide js-post-more">
     <div class="row nmhxs">
