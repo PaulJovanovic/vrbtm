@@ -1,4 +1,5 @@
 Vrbtm::Application.routes.draw do
+  get "privacy", to: "home#privacy"
   resources :tags
   get "peoples/search", to: "peoples#search"
   resources :posts
