@@ -70,12 +70,13 @@ $(document).ready(function() {
   }
 
   var gradient_numbers = [];
-    $(".js-gradient").each(function() {
-      gradient_numbers.push(parseInt($(this).data("number")));
-    });
-    gradient_numbers.sort();
-    var min_number = gradient_numbers[0];
-    var max_number = gradient_numbers[gradient_numbers.length - 1];
+  $(".js-gradient").each(function() {
+    gradient_numbers.push(parseInt($(this).data("number")));
+  });
+  gradient_numbers.sort();
+  var min_number = gradient_numbers[0];
+  var max_number = gradient_numbers[gradient_numbers.length - 1];
+  console.log(gradient_numbers);
 
   setTimeout(function(){
     $(".js-gradient").each(function(){
