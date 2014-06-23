@@ -73,10 +73,8 @@ $(document).ready(function() {
   $(".js-gradient").each(function() {
     gradient_numbers.push(parseInt($(this).data("number")));
   });
-  gradient_numbers.sort();
-  var min_number = gradient_numbers[0];
-  var max_number = gradient_numbers[gradient_numbers.length - 1];
-  console.log(gradient_numbers);
+  var min_number = Math.min.apply(null, gradient_numbers);
+  var max_number = Math.max.apply(null, gradient_numbers);
 
   setTimeout(function(){
     $(".js-gradient").each(function(){
