@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613201523) do
+ActiveRecord::Schema.define(version: 20140623074134) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20140613201523) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.integer  "posts_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

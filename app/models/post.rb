@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   has_many :likes, as: :likable, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :original_post, class_name: "Post", touch: true
   belongs_to :quote, counter_cache: true
   has_and_belongs_to_many :tags

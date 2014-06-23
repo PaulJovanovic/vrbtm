@@ -68,44 +68,42 @@
           Suggested People
         </div>
         <div class="paxxs bg-16 bss bwts bc-12">
-          <% User.all.each do |user| %>
-            <% if !current_user.following?(user) && current_user.id != user.id %>
-              <div class="mtxxxs-plus">
-                <%= link_to user_path(user) do %>
-                  <div class="row nmhxxs">
-                    <div class="col-xs-3 phxxs">
-                      <%= image_tag avatar_image(user, :small), class: "img-responsive" %>
+          <% @suggested_users.each do |user| %>
+            <div class="mtxxxs-plus">
+              <%= link_to user_path(user) do %>
+                <div class="row nmhxxs">
+                  <div class="col-xs-3 phxxs">
+                    <%= image_tag avatar_image(user, :small), class: "img-responsive" %>
+                  </div>
+                  <div class="col-xs-9 phxxs">
+                    <div class="fwl">
+                      <%= user.name %>
                     </div>
-                    <div class="col-xs-9 phxxs">
-                      <div class="fwl">
-                        <%= user.name %>
-                      </div>
-                      <div class="c-6">
-                        <table>
-                          <tr>
-                            <td class="plxxxs-plus">
-                              <i class="fa fa-user"></i>
-                            </td>
-                            <td class="plxxxs-plus">
-                              <%= number_to_shorthand(user.followers.count) %>
-                            </td>
-                            <td class="plxxxs-plus">
-                              -
-                            </td>
-                            <td class="plxxxs-plus">
-                              <i class="icon-rightquote fsxxxs"></i>
-                            </td>
-                            <td class="plxxxs-plus">
-                              <%= number_to_shorthand(user.posts.count) %>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
+                    <div class="c-6">
+                      <table>
+                        <tr>
+                          <td class="plxxxs-plus">
+                            <i class="fa fa-user"></i>
+                          </td>
+                          <td class="plxxxs-plus">
+                            <%= number_to_shorthand(user.followers.count) %>
+                          </td>
+                          <td class="plxxxs-plus">
+                            -
+                          </td>
+                          <td class="plxxxs-plus">
+                            <i class="icon-rightquote fsxxxs"></i>
+                          </td>
+                          <td class="plxxxs-plus">
+                            <%= number_to_shorthand(user.posts.count) %>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
-                <% end %>
-              </div>
-            <% end %>
+                </div>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
