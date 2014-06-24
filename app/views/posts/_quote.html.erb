@@ -75,8 +75,9 @@
               </td>
             <% end %>
             <td class="plxxs-plus">
-              <span class="pointer js-post-more-toggle">
+              <span class="relative pointer js-post-more-toggle">
                 <i class="fa fa-ellipsis-h fss c-teal-active"></i>
+                <div id="post-<%= post.id %>-comments-count" class="absolute top right mtxxxxs nmrxxs fsxxxxs c-teal<%= " hide" if post.comments_count == 0 %>"><%= post.comments_count %></div>
               </span>
             </td>
           </tr>
@@ -89,20 +90,49 @@
       <% end %>
     </div>
   </div>
-  <div class="row nmhxs mtxxxs ptxs bss bwts bc-14 hide js-post-more">
-    <div class="col-xs-10 phxs">
-      <% if post.original.tags.any? %>
-        <% post.original.tags.each do |tag| %>
-          <%= link_to tag_path(tag), class: "mlxxxs-plus show pull-left" do %>
-            <div class="phxxxs pvxxxxs bg-2 c-16 fsxxxs fwl pull-left js-post-tag"><%= tag.name %></div>
+  <div class="mtxxxs ptxs bss bwts bc-14 hide js-post-more">
+    <div class="row nmhxs">
+      <div class="col-xs-10 phxs">
+        <% if post.original.tags.any? %>
+          <% post.original.tags.each do |tag| %>
+            <%= link_to tag_path(tag), class: "mlxxxs-plus show pull-left" do %>
+              <div class="phxxxs pvxxxxs bg-2 c-16 fsxxxs fwl pull-left js-post-tag"><%= tag.name %></div>
+            <% end %>
           <% end %>
+        <% else %>
+          <div class="phxxxs pvxxxxs bg-10 c-16 fsxxxs fwl pull-left">no tags</div>
         <% end %>
-      <% else %>
-        <div class="phxxxs pvxxxxs bg-10 c-16 fsxxxs fwl pull-left">no tags</div>
+      </div>
+      <div class="col-xs-2 phxs text-right">
+        <i class="fa fa-share fsxs pointer c-10 js-facebook-share" data-link="<%= post_url(post) %>" title="Share"></i>
+      </div>
+    </div>
+    <div id="post-<%= post.id %>-comments" class="mtxs">
+      <% post.comments.each do |comment| %>
+        <div class="row nmhxxxs mtxxxs-plus">
+          <div class="col-xs-2 col-md-1 phxxxs">
+            <%= link_to user_path(comment.user) do %>
+              <%= image_tag avatar_image(comment.user, :small), class: "img-responsive" %>
+            <% end %>
+          </div>
+          <div class="col-xs-10 col-md-11 phxxxs">
+            <div class="">
+              <%= link_to comment.user.name, user_path(comment.user), class: "fsxxxs fwl c-teal" %> <abbr class="c-8 fsxxxxs fws js-timeago" title="<%= comment.created_at.getutc.iso8601 %>"><%= comment.created_at.to_s %></abbr>
+            </div>
+            <%= comment.text %>
+          </div>
+        </div>
       <% end %>
     </div>
-    <div class="col-xs-2 phxs text-right">
-      <i class="fa fa-share fsxs pointer c-10 js-facebook-share" data-link="<%= post_url(post) %>" title="Share"></i>
+    <div class="mtxs">
+      <%= form_for [post, Comment.new], remote: true, html: { class: "js-post-comment-form" } do |f| %>
+        <%= f.text_area :text, class: "paxxxs dvxl full-width bss bwas bc-10 js-comment-text" %>
+        <div class="row nmhxs">
+          <div class="col-sm-3 col-sm-offset-9 phxs">
+            <%= f.submit "Comment", class: "btn btn-primary pvxxxs mtxxxs fsxxs fwl full-width", data: { disable_with: "Commenting" } %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

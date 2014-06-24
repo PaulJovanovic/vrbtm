@@ -2,7 +2,9 @@ Vrbtm::Application.routes.draw do
   get "privacy", to: "home#privacy"
   resources :tags
   get "peoples/search", to: "peoples#search"
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   delete "likes", to: "likes#destroy"
   resources :likes
   get "sources/search", to: "sources#search"

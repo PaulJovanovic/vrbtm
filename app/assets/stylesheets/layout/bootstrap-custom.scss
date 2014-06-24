@@ -64,6 +64,11 @@ body {
     }
   }
 
+  textarea {
+    margin: 0;
+    resize: none;
+  }
+
   .btn, a.btn {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     filter: alpha(opacity=90);

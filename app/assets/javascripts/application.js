@@ -16,6 +16,7 @@
 //= require jquery.timeago
 //= require jquery.typeahead
 //= require like
+//= require comments
 //= require_tree .
 
 $(document).ready(function() {

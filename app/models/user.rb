@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship"
   has_many :followeds, through: :relationships
   has_many :followers, through: :reverse_relationships
+  has_many :comments
 
   has_one :avatar, :as => :assetable, :class_name => "Avatar", :dependent => :destroy
   has_one :cover_photo, :as => :assetable, :class_name => "CoverPhoto", :dependent => :destroy
@@ -68,7 +69,11 @@ class User < ActiveRecord::Base
   end
 
   def name
-    "#{first_name} #{last_name}"
+    if last_name.present?
+      "#{first_name} #{last_name}"
+    else
+      first_name
+    end
   end
 
   def search_image

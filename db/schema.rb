@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623163905) do
+ActiveRecord::Schema.define(version: 20140624190846) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20140623163905) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "followers", force: true do |t|
@@ -60,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140623163905) do
     t.datetime "updated_at"
     t.integer  "likes_count",      default: 0
     t.integer  "original_post_id"
+    t.integer  "comments_count",   default: 0
   end
 
   create_table "posts_tags", force: true do |t|
