@@ -28,7 +28,7 @@ class Photo < Asset
 
     draw = Draw.new
     draw.pointsize = font_size
-    draw.font_family = "Helvetica"
+    draw.font_family = "#{::Rails.root}/public/fonts/OpenSans-Regular.ttf"
     draw.gravity = NorthGravity
     draw.fill = "#FFFFFF"
     draw.font_weight = 700
