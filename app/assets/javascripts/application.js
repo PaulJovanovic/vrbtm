@@ -85,9 +85,9 @@ $(document).ready(function() {
       var quotationLeftPosition = $("#post-image-quotation-mark-left").position();
       var quotationRightPosition = $("#post-image-quotation-mark-right").position();
       $(".js-post-quote-image-word").each(function() {
-        words.push('{"left":' + conversion * (left + $(this).position().left) + ',"top":' + conversion * (top + $(this).position().top) + ',"text":"' + $(this).html() + '"}');
+        words.push('{"left":' + conversion * (left + $(this).position().left) + ',"top":' + conversion * (top + $(this).position().top + 8) + ',"text":"' + $(this).html() + '"}');
       });
-      $(".js-post-photo-attributes").val('{"background_color":"' + backgroundColor + '","font_size":' + conversion * fontSize + ',"words":[' + words.join(",") + '],"quotation_marks":[{"left":' + conversion * (left + quotationLeftPosition.left) + ',"top":'+ conversion * (top + quotationLeftPosition.top - 2) +'},{"left":' + conversion * (left + quotationRightPosition.left) + ',"top":' + conversion * (top + quotationRightPosition.top - 2) +'}]}');
+      $(".js-post-photo-attributes").val('{"background_color":"' + backgroundColor + '","font_size":' + conversion * fontSize + ',"words":[' + words.join(",") + '],"quotation_marks":[{"left":' + conversion * (left + quotationLeftPosition.left) + ',"top":'+ conversion * (top + quotationLeftPosition.top) +'},{"left":' + conversion * (left + quotationRightPosition.left) + ',"top":' + conversion * (top + quotationRightPosition.top) +'}]}');
     }
   });
 
