@@ -31,7 +31,7 @@ class Photo < Asset
     draw.font_family = "#{::Rails.root}/public/fonts/OpenSans-Regular.ttf"
     draw.gravity = NorthGravity
     draw.fill = "#FFFFFF"
-    draw.font_weight = 500
+    draw.font_weight = 600
     draw.stroke = "none"
     words.each do |word|
       metrics = draw.get_type_metrics(word["text"])
