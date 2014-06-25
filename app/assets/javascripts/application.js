@@ -304,7 +304,7 @@ $(document).ready(function() {
     }
   }).on('typeahead:selected', function(event, selection) {
     $(".js-quote-citable-id").val(selection.id);
-    $(".js-post-quote-name").val(selection.name);
+    $(".js-post-quote-name").val(selection.name).change();
   });
 
   $("#quotes-create").on("ajax:success", function(event, data, status, xhr) {
@@ -358,19 +358,30 @@ $(document).ready(function() {
 
   $(".js-facebook-share").click(function() {
     var $post = $(this).closest(".js-post");
-    var message = $post.find(".js-post-text").text();
-    var name = $post.find(".js-post-name").text();
-    var link = $(this).data("link");
     var $tags = $post.find(".js-post-tag");
-    var facebookMessage = '"' + message + '" -' + name;
-    if ($tags.length > 0) {
-      facebookMessage += "\n";
-      $tags.each(function() {
-        facebookMessage += "#" + $(this).text() + " ";
-      });
+    var $photo = $post.find(".js-post-photo");
+    var facebookParams = {};
+
+    if ($photo.length > 0) {
+      facebookParams["picture"] = $photo.attr("src");
+    } else {
+      facebookParams["message"] = "\"" + $post.find(".js-post-text").text() + "\" -" + $post.find(".js-post-name").text(),
+      facebookParams["actions"] = {
+        name: $post.find(".js-post-name").text(),
+        link: $(this).data("link")
+      };
+      if ($tags.length > 0) {
+        facebookParams["message"] += "\n";
+        $tags.each(function() {
+          facebookParams["message"] += "#" + $(this).text() + " ";
+        });
+      }
     }
+
     FB.login(function(){
-     FB.api('/me/feed', 'post', {message: facebookMessage, actions: { name: name, link: link }});
+      FB.api('/me/feed', 'post', facebookParams, function(response) {
+        console.log(response);
+      });
     }, {scope: 'publish_actions'});
   })
 });

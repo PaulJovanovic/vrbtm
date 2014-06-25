@@ -41,7 +41,8 @@
         <div class="mtxxxs fsxs c-2 lhxs">
           <% if post.photo %>
             <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug) do %>
-              <%= image_tag post.photo.url(:medium), class: "img-responsive inline" %>
+              <%= image_tag URI.join(request.url, post.photo.url(:medium)), class: "img-responsive inline js-post-photo" %>
+              <span class="hide js-post-text"><%= post.quote.text %></span>
             <% end %>
           <% else %>
             <i class="icon-leftquote c-10"></i>
@@ -90,8 +91,10 @@
         </table>
       <% end %>
     </div>
-    <% unless post.photo %>
-      <div class="col-xs-6 phxxs text-right">
+    <% if post.photo %>
+      <span class="hide js-post-name"><%= post.quote.name %></span>
+    <% else %>
+      <div class="col-xs-6 phxxs text-right<%= " hide" if post.photo %>">
         <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" do %>
           <span class="js-post-name"><%= post.quote.name %></span>
         <% end %>
