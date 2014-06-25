@@ -31,7 +31,7 @@ class Photo < Asset
     draw.font_family = "Helvetica"
     draw.gravity = NorthGravity
     draw.fill = "#FFFFFF"
-    draw.font_weight = 900
+    draw.font_weight = 700
     draw.stroke = "none"
     words.each do |word|
       metrics = draw.get_type_metrics(word["text"])
