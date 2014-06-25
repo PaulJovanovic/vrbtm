@@ -191,6 +191,11 @@ $(document).ready(function() {
     $($(this).data("target")).toggleClass("hide");
   });
 
+  $(".js-post-tag").click(function() {
+    $(this).toggleClass("active");
+    $("#post_tag_ids_" + $(this).data("id")).click();
+  });
+
   $(".js-post-tags-toggle").click(function() {
     var $icon = $(this).find(".js-post-tags-toggle-icon");
     if($icon.hasClass("fa-plus")) {
