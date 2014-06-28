@@ -3,7 +3,7 @@ module UserHelper
     if obj.avatar
       obj.avatar.url(size)
     else
-      "avatar.png"
+      "https://s3.amazonaws.com/vrbtm2/assets/avatar.png"
     end
   end
 
