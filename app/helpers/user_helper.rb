@@ -3,7 +3,7 @@ module UserHelper
     if obj.avatar
       obj.avatar.url(size)
     else
-      "avatar.jpg"
+      "avatar.png"
     end
   end
 
