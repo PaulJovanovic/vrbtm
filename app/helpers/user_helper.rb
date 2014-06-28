@@ -11,7 +11,7 @@ module UserHelper
     if obj.cover_photo
       obj.cover_photo.url(size)
     else
-      ""
+      "https://s3.amazonaws.com/vrbtm2/assets/cover.png"
     end
   end
 end
