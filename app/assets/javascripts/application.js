@@ -362,31 +362,14 @@ $(document).ready(function() {
   }(document, 'script', 'facebook-jssdk'));
 
   $(".js-facebook-share").click(function() {
-    var $post = $(this).closest(".js-post");
-    var $tags = $post.find(".js-post-tag");
-    var $photo = $post.find(".js-post-photo");
-    var facebookParams = {};
-
-    if ($photo.length > 0) {
-      facebookParams["picture"] = $photo.attr("src");
-    } else {
-      facebookParams["message"] = "\"" + $post.find(".js-post-text").text() + "\" -" + $post.find(".js-post-name").text(),
-      facebookParams["actions"] = {
-        name: $post.find(".js-post-name").text(),
-        link: $(this).data("link")
-      };
-      if ($tags.length > 0) {
-        facebookParams["message"] += "\n";
-        $tags.each(function() {
-          facebookParams["message"] += "#" + $(this).text() + " ";
-        });
-      }
-    }
-
+    var href = $(this).data("link");
     FB.login(function(){
-      FB.api('/me/feed', 'post', facebookParams, function(response) {
-        console.log(response);
+      FB.ui({
+        method: 'share',
+        href: href,
+      }, function(response){
+        console.log(response)
       });
-    }, {scope: 'publish_actions'});
+    });
   })
 });
