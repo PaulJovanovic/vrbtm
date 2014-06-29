@@ -116,7 +116,7 @@
       </div>
       <div class="col-xs-2 phxs text-right">
         <i class="fa fa-share fsxs pointer c-10 js-facebook-share" title="Share"></i>
-        <% if post.user_id = current_user.id %>
+        <% if post.user_id == current_user.id %>
           <i class="fa fa-trash-o fsxs pointer c-10 js-post-destroy"></i>
         <% end %>
       </div>
