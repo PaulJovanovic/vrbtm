@@ -366,9 +366,7 @@ $(document).ready(function() {
     FB.login(function(){
       FB.ui({
         method: 'share',
-        href: href,
-      }, function(response){
-        console.log(response)
+        href: href
       });
     });
   })
