@@ -9,7 +9,7 @@
               <%= image_tag avatar_image(following, :small), class: "img-responsive" %>
             <% end %>
           </div>
-          <div class="col-xs-7 phxxs">
+          <div class="col-xs-6 col-sm-7 phxxs">
             <div>
               <%= link_to following.name, user_path(following), class: "fsxs fwl c-teal" %>
             </div>
@@ -35,7 +35,7 @@
               </table>
             </div>
           </div>
-          <div class="col-xs-3 phxxs">
+          <div class="col-xs-4 col-sm-3 phxxs">
             <% if current_user.id == following.id %>
               <div class="btn btn-primary disabled full-width">You</div>
             <% else %>
