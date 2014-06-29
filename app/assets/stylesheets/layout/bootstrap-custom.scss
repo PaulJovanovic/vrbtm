@@ -96,8 +96,8 @@ body {
       outline-width: 0px;
 
       &.disabled, &:disabled {
-        background-color: #999999;
-        border-color: #999999;
+        background-color: $blueGrey;
+        border-color: $blueGrey;
         outline-width: 0px;
         color: #FFFFFF;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -138,9 +138,9 @@ body {
     }
 
     &.btn-info, &.btn-info:hover, &.btn-info:visited, &.btn-info:active, &.btn-info:focus {
-      background-color: #00A6ED;
-      border-color: #00A6ED;
-      border-bottom: 2px solid #0079B2;
+      background-color: $shade2;
+      border-color: $shade2;
+      border-bottom: 2px solid $shade2;
       outline-width: 0px;
 
       &.disabled, &:disabled {

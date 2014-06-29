@@ -10,8 +10,15 @@ Vrbtm::Application.routes.draw do
   get "sources/search", to: "sources#search"
   resources :sources
   resources :quotes
-  get "users/search", to: "users#search"
-  resources :users
+  resources :users do
+    collection do
+      get "search"
+    end
+    member do
+      get "followers"
+      get "following"
+    end
+  end
   resources :relationships, only: [:create, :destroy]
   devise_for :users, path: '', path_names: {sign_in: 'login', sign_out: 'logout'}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   get "sign_in", to: "devise/sessions#new"

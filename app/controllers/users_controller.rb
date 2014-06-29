@@ -27,6 +27,16 @@ class UsersController < ApplicationController
     render json: User.search_by_name(params[:name]).map{ |user| { id: user.id, name: user.name, image: user.search_image, followers: "#{user.id} followers" } }
   end
 
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.paginate(page: params[:page], per_page: 20).order("first_name, last_name")
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @followings = @user.following.paginate(page: params[:page], per_page: 20).order("first_name, last_name")
+  end
+
   private
 
   def user_params

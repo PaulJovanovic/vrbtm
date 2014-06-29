@@ -1,0 +1,133 @@
+<div class="row mtm mhn bg-16 bss bwhs bwts bwbm bc-2">
+  <div class="col-sm-10 phn pvxxl bg-teal bg-top bg-cover" style="background-image: url('<%= cover_image(@user) %>')">
+    <div class="text-center">
+      <%= image_tag avatar_image(@user), class: "daxxxl bss bwam bc-16" %>
+    </div>
+    <div class="mts fsl fwl c-16 text-center" style="text-shadow: 1px 1px #000000;">
+      <%= @user.name %> <%= "<i class='icon-verified fsxs'></i>".html_safe if @user.verified? %>
+    </div>
+    <div class="relative mts">
+      <div class="absolute fill bg-1 fade-s zxs"></div>
+      <div class="row nmhxxs pvxs zs">
+        <div class="col-sm-8 col-sm-offset-2 phxxs c-12">
+          <div class="phxs fws">
+            "<%= @user.favorite_quote.presence || "Sometimes I can only throw as fast as my arm will let me." %>"
+          </div>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 phxxs text-right c-16">
+          <div class="phxs">
+            <%= @user.favorite_quote_author.presence || "Dennis Quade" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 phn text-center hidden-xs">
+    <div class="pvxs phs">
+      <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+        <%= link_to user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.posts_count) %>
+          </div>
+          <div class="fsxs fwl">
+            posts
+          </div>
+        <% end %>
+      </div>
+      <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+        <%= link_to followers_user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.followers_count) %>
+          </div>
+          <div class="fsxs fwl">
+            followers
+          </div>
+        <% end %>
+      </div>
+      <div class="mtxs-plus ptxs-plus bss bwts-plus bc-12">
+        <%= link_to following_user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.following_count) %>
+          </div>
+          <div class="fsxs fwl">
+            following
+          </div>
+        <% end %>
+      </div>
+      <% if current_user.id == @user.id %>
+        <div class="mtm">
+          <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary full-width" %>
+        </div>
+      <% else %>
+        <div class="mtm">
+          <% unless current_user.following?(@user) %>
+            <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+              <%= f.hidden_field :followed_id %>
+              <%= f.submit "Follow", class: "btn btn-primary full-width" %>
+            <% end %>
+          <% else %>
+            <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
+                 html: { method: :delete }) do |f| %>
+              <%= f.submit "Unfollow", class: "btn btn-info full-width" %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="visible-xs">
+  <div class="paxs bg-16">
+    <div class="row nmhxxs">
+      <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+        <%= link_to user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.posts_count) %>
+          </div>
+          <div class="fsxs fwl">
+            posts
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+        <%= link_to followers_user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.followers_count) %>
+          </div>
+          <div class="fsxs fwl">
+            followers
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-4 phxxs bss bwls-plus bc-teal text-center">
+        <%= link_to following_user_path(@user) do %>
+          <div class="fss fwl c-teal">
+            <%= number_to_shorthand(@user.following_count) %>
+          </div>
+          <div class="fsxs fwl">
+            following
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if current_user.id == @user.id %>
+    <div class="mts">
+      <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary full-width" %>
+    </div>
+  <% else %>
+    <div class="mts">
+      <% unless current_user.following?(@user) %>
+        <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+          <%= f.hidden_field :followed_id %>
+          <%= f.submit "Follow", class: "btn btn-primary full-width" %>
+        <% end %>
+      <% else %>
+        <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
+             html: { method: :delete }) do |f| %>
+          <%= f.submit "Unfollow", class: "btn btn-info full-width" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

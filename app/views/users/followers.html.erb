@@ -1,0 +1,62 @@
+<%= render "users/cover" %>
+<div class="row nmhxs">
+  <div class="col-sm-8 phxs mts">
+    <% @followers.each do |follower| %>
+      <div class="paxs mtxxxs-plus bg-16 bss bwhs bwts bwbm bc-2">
+        <div class="row nmhxxs mtxs-plus">
+          <div class="col-xs-2 phxxs">
+            <%= link_to user_path(follower) do  %>
+              <%= image_tag avatar_image(follower, :small), class: "img-responsive" %>
+            <% end %>
+          </div>
+          <div class="col-xs-7 phxxs">
+            <div>
+              <%= link_to follower.name, user_path(follower), class: "fsxs fwl c-teal" %>
+            </div>
+            <div class="c-6">
+              <table>
+                <tr>
+                  <td class="plxxxs-plus">
+                    <i class="fa fa-user"></i>
+                  </td>
+                  <td class="plxxxs-plus">
+                    <%= number_to_shorthand(follower.followers_count) %>
+                  </td>
+                  <td class="plxxxs-plus">
+                    -
+                  </td>
+                  <td class="plxxxs-plus">
+                    <i class="icon-rightquote fsxxxs"></i>
+                  </td>
+                  <td class="plxxxs-plus">
+                    <%= number_to_shorthand(follower.posts_count) %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-xs-3 phxxs">
+            <% if current_user.id == follower.id %>
+              <div class="btn btn-primary disabled full-width">You</div>
+            <% else %>
+              <% unless current_user.following?(follower) %>
+                <%= form_for(current_user.relationships.build(followed_id: follower.id)) do |f| %>
+                  <%= f.hidden_field :followed_id %>
+                  <%= f.submit "Follow", class: "btn btn-primary full-width" %>
+                <% end %>
+              <% else %>
+                <%= form_for(current_user.relationships.find_by(followed_id: follower.id),
+                     html: { method: :delete }) do |f| %>
+                  <%= f.submit "Unfollow", class: "btn btn-info full-width" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= will_paginate @followers %>
+    </div>
+  </div>
+</div>
