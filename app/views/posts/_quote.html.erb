@@ -1,4 +1,4 @@
-<div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2 js-post">
+<div class="mtxxxs-plus phxs pvxs bg-16 bss bwhs bwts bwbm bc-2 js-post" data-url="<%= post_url(post) %>">
   <% cache("posts/#{post.id}/#{post.updated_at}") do %>
     <div class="row nmhxxxs">
       <div class="col-xs-2 col-md-1 phxxxs">
@@ -115,7 +115,10 @@
         <% end %>
       </div>
       <div class="col-xs-2 phxs text-right">
-        <i class="fa fa-share fsxs pointer c-10 js-facebook-share" data-link="<%= post_url(post) %>" title="Share"></i>
+        <i class="fa fa-share fsxs pointer c-10 js-facebook-share" title="Share"></i>
+        <% if post.user_id = current_user.id %>
+          <i class="fa fa-trash-o fsxs pointer c-10 js-post-destroy"></i>
+        <% end %>
       </div>
     </div>
     <div id="post-<%= post.id %>-comments" class="mtxs">

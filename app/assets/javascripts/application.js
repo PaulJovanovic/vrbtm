@@ -362,7 +362,7 @@ $(document).ready(function() {
   }(document, 'script', 'facebook-jssdk'));
 
   $(".js-facebook-share").click(function() {
-    var href = $(this).data("link");
+    var href = $(this).closest(".js-post").data("url");
     FB.login(function(){
       FB.ui({
         method: 'share',
