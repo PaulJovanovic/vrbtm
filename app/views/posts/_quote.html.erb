@@ -54,7 +54,7 @@
     </div>
   <% end %>
   <div class="row nmhxxs mtxxxs fss fwl">
-    <div class="col-xs-6 phxxs c-10">
+    <div class="col-xs-4 phxxs c-10">
       <% if current_user %>
         <table>
           <tr>
@@ -94,7 +94,7 @@
     <% if post.photo %>
       <span class="hide js-post-name"><%= post.quote.name %></span>
     <% else %>
-      <div class="col-xs-6 phxxs text-right<%= " hide" if post.photo %>">
+      <div class="col-xs-8 phxxs text-right<%= " hide" if post.photo %>">
         <%= link_to send("#{post.quote.citable_type.underscore}_path", post.quote.citable.slug), class: "c-teal" do %>
           <span class="js-post-name"><%= post.quote.name %></span>
         <% end %>
