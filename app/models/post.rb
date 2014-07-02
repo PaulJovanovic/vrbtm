@@ -38,6 +38,10 @@ class Post < ActiveRecord::Base
     likes.where(user: user).count == 1
   end
 
+  def notification_text
+    "post: \"#{quote.text.truncate(30)}\""
+  end
+
   def transfer_tags_to_quote
     quote.tags << tags
     quote.save

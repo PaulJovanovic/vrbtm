@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629024842) do
+ActiveRecord::Schema.define(version: 20140702063509) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -60,6 +60,19 @@ ActiveRecord::Schema.define(version: 20140629024842) do
   end
 
   add_index "likes", ["likable_type", "likable_id", "user_id"], name: "index_likes_on_likable_type_and_likable_id_and_user_id", unique: true, using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.string   "notifiable_type"
+    t.integer  "notifiable_id"
+    t.integer  "from_user_id"
+    t.integer  "to_user_id"
+    t.string   "subject"
+    t.string   "action"
+    t.string   "text"
+    t.boolean  "read",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: true do |t|
     t.integer  "quote_id"

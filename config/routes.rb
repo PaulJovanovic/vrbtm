@@ -1,4 +1,5 @@
 Vrbtm::Application.routes.draw do
+  post "notifications/:id/read", to: "notifications#read", as: "read_notification"
   get "privacy", to: "home#privacy"
   resources :tags
   get "peoples/search", to: "peoples#search"

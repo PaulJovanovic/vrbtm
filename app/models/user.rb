@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship"
   has_many :following, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :notifications, foreign_key: "to_user_id", dependent: :destroy
 
   has_one :avatar, :as => :assetable, :class_name => "Avatar", :dependent => :destroy
   has_one :cover_photo, :as => :assetable, :class_name => "CoverPhoto", :dependent => :destroy
