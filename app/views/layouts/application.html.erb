@@ -45,12 +45,12 @@
               <div class="col-xs-3 phxxs">
                 <table class="pull-right">
                   <tr>
-                    <td class="plxs-plus">
+                    <td class="pls-plus">
                       <%= link_to tags_path do %>
                         <i class="fa fa-book c-16 fss"></i>
                       <% end %>
                     </td>
-                    <td class="plxs-plus">
+                    <td class="pls-plus">
                       <div class="relative js-notification-toggle">
                         <i class="fa fa-globe c-16 fss pointer"></i>
                         <div class="absolute top right nmrxxxs mtxxxs full-width text-center lhxxxs<%= " hide" if current_user.notifications.where(read: false).count == 0 %> js-notification-badge">
@@ -58,7 +58,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="plxs-plus">
+                    <td class="pls-plus">
                       <%= link_to destroy_user_session_path, method: :delete do %>
                         <i class="fa fa-sign-out c-16 fss"></i>
                       <% end %>
