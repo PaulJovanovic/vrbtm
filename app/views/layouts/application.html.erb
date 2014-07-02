@@ -69,23 +69,27 @@
             </div>
           </div>
         </div>
-        <div class="absolute top right mlxs mrxs mtxl bg-16 bss bwhs bwbm bc-2 zxl hide js-notifications">
-          <% current_user.notifications.order("created_at desc").limit(5).each do |notification| %>
-            <div class="bss bwts-plus bc-12 js-notification" data-url=<%= read_notification_url(notification) %><%= " data-read=true" if notification.read %>>
-              <%= link_to send("#{notification.notifiable_type.downcase}_path", notification.notifiable_id) do %>
-                <div class="paxs bg-16">
-                  <div class="row nmhxxxs">
-                    <div class="col-xs-1 phxxxs">
-                      <%= image_tag avatar_image(notification.from_user, :small), class: "img-responsive" %>
+        <div class="row nmhxs">
+          <div class="col-sm-4 col-sm-offset-8 phxs">
+            <div class="absolute top right mlxs mrxs bg-16 bss bwhs bwts bwbm bc-2 zxl hide js-notifications">
+              <% current_user.notifications.order("created_at desc").limit(5).each do |notification| %>
+                <div class="bss bwts-plus bc-12 js-notification" data-url=<%= read_notification_url(notification) %><%= " data-read=true" if notification.read %>>
+                  <%= link_to send("#{notification.notifiable_type.downcase}_path", notification.notifiable_id) do %>
+                    <div class="paxs bg-16">
+                      <div class="row nmhxxxs">
+                        <div class="col-xs-1 phxxxs">
+                          <%= image_tag avatar_image(notification.from_user, :small), class: "img-responsive" %>
+                        </div>
+                        <div class="col-xs-11 phxxxs">
+                          <span class="fwl"><%= notification.subject %></span> <%= " #{notification.action} #{notification.text}" %>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-xs-11 phxxxs">
-                      <span class="fwl"><%= notification.subject %></span> <%= " #{notification.action} #{notification.text}" %>
-                    </div>
-                  </div>
+                  <% end %>
                 </div>
               <% end %>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
