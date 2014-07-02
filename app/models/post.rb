@@ -51,7 +51,7 @@ class Post < ActiveRecord::Base
   private
 
   def notify_user?
-    quote.citable_type = "User" && user_id != quote.citable_id && Notification.where(notifiable_type: "Post", notifiable_id: id, from_user: user, to_user: quote.citable, action: "quoted").count == 0
+    quote.citable_type == "User" && user_id != quote.citable_id && Notification.where(notifiable_type: "Post", notifiable_id: id, from_user: user, to_user: quote.citable, action: "quoted").count == 0
   end
 
   def notify_user
