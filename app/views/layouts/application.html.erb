@@ -34,7 +34,7 @@
           </div>
           <div class="col-xs-10 col-sm-4 phxs">
             <div class="row nmhxs">
-              <div class="col-xs-9 phxs">
+              <div class="col-xs-8 phxs">
                 <%= link_to user_path(current_user), class: "c-16 fsxxxs" do %>
                   <div class="mrxs daxs pull-left">
                     <%= image_tag avatar_image(current_user, :small), id: "current-user-avatar", class: "img-responsive mtxs" %>
@@ -42,7 +42,7 @@
                   <div id="current-user-name" class="pull-left"><%= current_user.name %></div>
                 <% end %>
               </div>
-              <div class="col-xs-3 phxxs">
+              <div class="col-xs-4 phxs">
                 <table class="pull-right">
                   <tr>
                     <td class="pls-plus">
@@ -59,9 +59,9 @@
                       </div>
                     </td>
                     <td class="pls-plus">
-                      <%= link_to destroy_user_session_path, method: :delete do %>
-                        <i class="fa fa-cog c-16 fss"></i>
-                      <% end %>
+                      <div class="pointer js-tab" data-target="#account-dropdown">
+                        <i class="fa fa-cog c-16 c-teal-active fss"></i>
+                      </div>
                     </td>
                   </tr>
                 </table>
@@ -71,6 +71,22 @@
         </div>
         <div class="row nmhxs">
           <div class="col-sm-4 col-sm-offset-8 phxs">
+            <div id="account-dropdown" class="absolute top right mlxs mrxs bg-16 bss bwhs bwts bwbm bc-2 zl hide">
+              <div class="bss bwts-plus bc-12">
+                <%= link_to edit_user_path(current_user) do %>
+                  <div class="phs pvxxxs c-8 c-1-hover fsxxxs">
+                    Edit Profile
+                  </div>
+                <% end %>
+              </div>
+              <div class="bss bwts-plus bc-12">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <div class="phs pvxxxs c-8 c-1-hover fsxxxs">
+                    Logout
+                  </div>
+                <% end %>
+              </div>
+            </div>
             <div class="absolute top right mlxs mrxs bg-16 bss bwhs bwts bwbm bc-2 zxl hide js-notifications">
               <% current_user.notifications.order("created_at desc").limit(5).each do |notification| %>
                 <div class="bss bwts-plus bc-12 js-notification" data-url=<%= read_notification_url(notification) %><%= " data-read=true" if notification.read %>>
