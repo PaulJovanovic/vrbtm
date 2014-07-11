@@ -43,7 +43,7 @@
                 <% end %>
               </div>
               <div class="col-xs-4 phxs">
-                <table class="pull-right">
+                <table class="pull-right js-tabs">
                   <tr>
                     <td class="pls-plus">
                       <%= link_to tags_path do %>
@@ -51,15 +51,15 @@
                       <% end %>
                     </td>
                     <td class="pls-plus">
-                      <div class="relative js-notification-toggle">
-                        <i class="icon-book c-16 fsxs pointer"></i>
+                      <div class="relative js-tab" data-target="#notifications-dropdown" data-unfocus="true">
+                        <i class="icon-book c-16 c-teal-active fsxs pointer"></i>
                         <div class="absolute top right nmrxxxs mtxxxs full-width text-center lhxxxs<%= " hide" if current_user.notifications.where(read: false).count == 0 %> js-notification-badge">
                           <span class="phxxxs pvxxxxs bg-orange c-16 fsxxxxs circle js-notification-badge-count"><%= current_user.notifications.where(read: false).count %></div>
                         </div>
                       </div>
                     </td>
                     <td class="pls-plus">
-                      <div class="pointer js-tab" data-target="#account-dropdown">
+                      <div class="pointer js-tab" data-target="#account-dropdown" data-unfocus="true">
                         <i class="fa fa-cog c-16 c-teal-active fss"></i>
                       </div>
                     </td>
@@ -87,7 +87,7 @@
                 <% end %>
               </div>
             </div>
-            <div class="absolute top right mlxs mrxs bg-16 bss bwhs bwts bwbm bc-2 zxl hide js-notifications">
+            <div id="notifications-dropdown" class="absolute top right mlxs mrxs bg-16 bss bwhs bwts bwbm bc-2 zxl hide">
               <% current_user.notifications.order("created_at desc").limit(5).each do |notification| %>
                 <div class="bss bwts-plus bc-12 js-notification" data-url=<%= read_notification_url(notification) %><%= " data-read=true" if notification.read %>>
                   <%= link_to send("#{notification.notifiable_type.downcase}_path", notification.notifiable_id) do %>

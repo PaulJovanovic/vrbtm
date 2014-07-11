@@ -1,11 +1,4 @@
 $(document).ready ->
-  $(".js-notification-toggle").click (event)->
-    event.stopPropagation()
-    $(".js-notifications").toggleClass("hide")
-
-  $(document).on "click", (event)->
-    $(".js-notifications").addClass("hide")
-
   $(document).on "mouseenter", ".js-notification", (event) ->
     $notification = $(@)
     event.stopPropagation()

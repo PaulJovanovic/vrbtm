@@ -186,11 +186,6 @@ $(document).ready(function() {
     });
   }, 400);
 
-  $(".js-tab").click(function() {
-    $(this).toggleClass("active");
-    $($(this).data("target")).toggleClass("hide");
-  });
-
   $(".js-post-tag").click(function() {
     $(this).toggleClass("active");
     $("#post_tag_ids_" + $(this).data("id")).click();
