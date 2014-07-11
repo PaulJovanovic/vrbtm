@@ -23,6 +23,36 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-share:before {
+	content: "\e60d";
+}
+.icon-tag:before {
+	content: "\e60e";
+}
+.icon-comment:before {
+	content: "\e60f";
+}
+.icon-user:before {
+	content: "\e610";
+}
+.icon-book:before {
+	content: "\e606";
+}
+.icon-more:before {
+	content: "\e607";
+}
+.icon-picture:before {
+	content: "\e609";
+}
+.icon-stone:before {
+	content: "\e60b";
+}
+.icon-trash:before {
+	content: "\e60c";
+}
+.icon-search:before {
+	content: "\e605";
+}
 .icon-leftquote:before {
 	content: "\e601";
 }
@@ -37,4 +67,10 @@
 }
 .icon-verified:before {
 	content: "\e600";
+}
+.icon-cog:before {
+	content: "\e608";
+}
+.icon-star:before {
+	content: "\e60a";
 }
