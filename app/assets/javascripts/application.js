@@ -22,6 +22,7 @@
 //= require minicolors
 //= require like
 //= require comments
+//= require tabs
 //= require_tree .
 
 $(document).ready(function() {
