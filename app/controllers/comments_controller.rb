@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      render json: { comment: { id: @comment.id, post_id: @comment.post_id, user_id: @comment.user_id, text: @comment.text, created_at: @comment.created_at } }
+      render json: { comment: { id: @comment.id, post_id: @comment.post_id, user_id: @comment.user_id, text: @comment.text } }
     else
       render json: { errors: @comment.errors }, status: :unprocessible_entity
     end
