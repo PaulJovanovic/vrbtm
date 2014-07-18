@@ -10,3 +10,5 @@ $(document).ready ->
 
     , (arrayOfNewElems) ->
       $("#infscr-loading").remove()
+      $(arrayOfNewElems).each ->
+        $(@).find(".js-timeago").timeago()
