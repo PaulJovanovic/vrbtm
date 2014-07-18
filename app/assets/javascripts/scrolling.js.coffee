@@ -3,11 +3,8 @@ $(document).ready ->
     $(@).infinitescroll
       navSelector  : ".pagination"
       nextSelector : ".pagination a:last"
-      # // selector for the NEXT link (to page 2)
       itemSelector : ".js-post"
-      loadingText  : "Loading new posts...",
-      # // selector for all items you'll retrieve
-
+      bufferPx     : 800,
     , (arrayOfNewElems) ->
       $("#infscr-loading").remove()
       $(arrayOfNewElems).each ->
