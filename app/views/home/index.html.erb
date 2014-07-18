@@ -68,13 +68,13 @@
         </div>
       <% end %>
     </div>
-    <div class="mtm">
+    <div class="mtm js-infinite-scroll">
       <% @posts.each do |post| %>
         <%= render partial: "posts/quote", locals: { post: post } %>
       <% end %>
-      <div class="text-center">
-        <%= will_paginate @posts %>
-      </div>
+    </div>
+    <div id="navigation" class="text-center">
+      <%= will_paginate @posts %>
     </div>
   </div>
   <div class="col-sm-4 phxs mtm">
