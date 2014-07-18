@@ -1,5 +1,5 @@
 $(document).ready ->
-  $(document).on "mouseenter", ".js-notification", (event) ->
+  $(document).on "mouseenter click", ".js-notification", (event) ->
     $notification = $(@)
     event.stopPropagation()
     if !$notification.data("read")?
