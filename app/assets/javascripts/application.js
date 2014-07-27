@@ -203,7 +203,7 @@ $(document).ready(function() {
     }
   });
 
-  $(".js-post-more-toggle").click(function() {
+  $("body").on("click", ".js-post-more-toggle", function() {
     $(this).toggleClass("active");
     $(this).closest(".js-post").find(".js-post-more").toggleClass("hide");
   });
